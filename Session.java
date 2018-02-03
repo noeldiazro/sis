@@ -1,6 +1,8 @@
+import java.util.*;
+
 class Session {
     private Course course;
-    private int numberOfStudents = 0;
+    private List<Student> students = new ArrayList<Student>();
     
     Session(Course course) {
 	this.course = course;
@@ -15,10 +17,14 @@ class Session {
     }
     
     int getNumberOfStudents() {
-	return numberOfStudents;
+	return students.size();
     }
 
     void enroll(Student student) {
-	numberOfStudents += 1;
+	students.add(student);
+    }
+
+    List<Student> getAllStudents() {
+	return students;
     }
 }

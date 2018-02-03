@@ -1,4 +1,6 @@
-public class CourseTest extends junit.framework.TestCase {
+import junit.framework.TestCase;
+
+public class CourseTest extends TestCase {
     public void testCreateBasicMathCourse() {
 	final String department = "Math";
 	final String number = "101";
