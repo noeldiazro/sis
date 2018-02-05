@@ -1,3 +1,5 @@
+package studentinfo;
+
 class Course {
     private String department;
     private String number;

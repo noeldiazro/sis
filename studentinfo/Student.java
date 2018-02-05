@@ -1,4 +1,9 @@
-class Student {
+package studentinfo;
+
+import java.lang.String;
+import java.lang.Object;
+
+class Student extends Object {
     private String name;
     
     Student(String name) {
