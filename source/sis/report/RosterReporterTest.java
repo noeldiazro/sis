@@ -1,16 +1,20 @@
-package studentinfo;
+package sis.report;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import junit.framework.TestCase;
+import sis.studentinfo.Course;
+import sis.studentinfo.DateUtil;
+import sis.studentinfo.Session;
+import sis.studentinfo.Student;
+
 
 public class RosterReporterTest extends TestCase {
     private Session session;
 
     public void setUp() {
 	Course course = new Course("Engl", "200");
-	session = new Session(course, createDate(2018, 1, 8));
+	Date startDate = new DateUtil().createDate(2018, 1, 8);
+	session = new Session(course, startDate);
     }
     
     public void testRosterReportForASessionWithoutStudents() {
@@ -24,16 +28,10 @@ public class RosterReporterTest extends TestCase {
 	session.enroll(new Student("FirstnameB LastnameB"));
 
 	String report = new RosterReporter(session).getReport();
-	
+
 	assertEquals(RosterReporter.HEADER + RosterReporter.NEWLINE +
 		     "FirstnameA LastnameA" + RosterReporter.NEWLINE +
 		     "FirstnameB LastnameB" + RosterReporter.NEWLINE +
 		     RosterReporter.FOOTER + "2" + RosterReporter.NEWLINE, report);
     }
-    
-    private Date createDate(int year, int month, int day) {
-	final int january = 1;
-	Calendar calendar = new GregorianCalendar(year, month - january, day);
-	return calendar.getTime();
-    }    
 }

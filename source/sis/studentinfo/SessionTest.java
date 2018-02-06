@@ -1,19 +1,19 @@
-package studentinfo;
+package sis.studentinfo;
 
 import junit.framework.TestCase;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 public class SessionTest extends TestCase {
     private Session session;
     private Date startDate;
+    private DateUtil dateUtil;
     private static final String DEPARTMENT = "Engl";
     private static final String NUMBER = "200";
     
     public void setUp() {
 	Course course = new Course(DEPARTMENT, NUMBER);
-	startDate = createDate(2018, 1, 8);
+	dateUtil = new DateUtil();
+	startDate = dateUtil.createDate(2018, 1, 8);
 	session = new Session(course, startDate);
     }
     
@@ -49,12 +49,6 @@ public class SessionTest extends TestCase {
     }
 
     public void testSessionEndDate() {
-	assertEquals(createDate(2018, 4, 27), session.getEndDate());
-    }
-	
-    private Date createDate(int year, int month, int day) {
-	final int january = 1;
-	Calendar calendar = new GregorianCalendar(year, month - january, day);
-	return calendar.getTime();
+	assertEquals(dateUtil.createDate(2018, 4, 27), session.getEndDate());
     }
 }

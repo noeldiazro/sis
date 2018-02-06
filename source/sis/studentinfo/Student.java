@@ -1,16 +1,16 @@
-package studentinfo;
+package sis.studentinfo;
 
 import java.lang.String;
 import java.lang.Object;
 
-class Student extends Object {
+public class Student extends Object {
     private String name;
     
-    Student(String name) {
+    public Student(String name) {
 	this.name = name;
     }
 
-    String getName() {
+    public String getName() {
 	return name;
     }
 }

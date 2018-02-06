@@ -1,6 +1,8 @@
-package studentinfo;
+package sis;
 
 import junit.framework.TestSuite;
+import sis.studentinfo.*;
+import sis.report.RosterReporterTest;
 
 public class AllTests {
     public static TestSuite suite() {
@@ -9,6 +11,7 @@ public class AllTests {
 	suite.addTestSuite(CourseTest.class);
 	suite.addTestSuite(SessionTest.class);
 	suite.addTestSuite(RosterReporterTest.class);
+	suite.addTestSuite(DateUtilTest.class);
 	return suite;
     }
 }

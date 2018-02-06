@@ -1,10 +1,10 @@
-package studentinfo;
+package sis.studentinfo;
 
-class Course {
+public class Course {
     private String department;
     private String number;
     
-    Course(String department, String number) {
+    public Course(String department, String number) {
 	this.department = department;
 	this.number = number;
     }

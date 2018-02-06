@@ -1,4 +1,4 @@
-package studentinfo;
+package sis.studentinfo;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,13 +10,13 @@ import java.util.List;
 /**
  * Tracks all information pertinent to a course session
  */
-class Session implements Iterable<Student> {
+public class Session implements Iterable<Student> {
     private Course course;
     private List<Student> students = new ArrayList<Student>();
     private Date startDate;
 
 
-    Session(Course course, Date startDate) {
+    public Session(Course course, Date startDate) {
 	this.course = course;
 	this.startDate = startDate;
     }
@@ -29,11 +29,11 @@ class Session implements Iterable<Student> {
 	return course.getNumber();
     }
     
-    int getNumberOfStudents() {
+    public int getNumberOfStudents() {
 	return students.size();
     }
 
-    void enroll(Student student) {
+    public void enroll(Student student) {
 	students.add(student);
     }
 
