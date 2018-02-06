@@ -8,6 +8,7 @@ public class AllTests {
 	suite.addTestSuite(StudentTest.class);
 	suite.addTestSuite(CourseTest.class);
 	suite.addTestSuite(SessionTest.class);
+	suite.addTestSuite(RosterReporterTest.class);
 	return suite;
     }
 }

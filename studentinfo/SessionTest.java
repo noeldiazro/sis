@@ -8,8 +8,8 @@ import java.util.GregorianCalendar;
 public class SessionTest extends TestCase {
     private Session session;
     private Date startDate;
-    private final static String DEPARTMENT = "Engl";
-    private final static String NUMBER = "200";
+    private static final String DEPARTMENT = "Engl";
+    private static final String NUMBER = "200";
     
     public void setUp() {
 	Course course = new Course(DEPARTMENT, NUMBER);
@@ -51,7 +51,7 @@ public class SessionTest extends TestCase {
     public void testSessionEndDate() {
 	assertEquals(createDate(2018, 4, 27), session.getEndDate());
     }
-
+	
     private Date createDate(int year, int month, int day) {
 	final int january = 1;
 	Calendar calendar = new GregorianCalendar(year, month - january, day);
