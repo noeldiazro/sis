@@ -18,4 +18,14 @@ public class CourseTest extends TestCase {
 	assertEquals(department, course.getDepartment());
 	assertEquals(number, course.getNumber());
     }
+
+    public void testNumberOfCredits() {
+	final int numberOfCredits = 3;
+	
+	Course course = new Course("Engl", "200");
+	assertEquals(0, course.getNumberOfCredits());
+
+	course.setNumberOfCredits(numberOfCredits);
+	assertEquals(numberOfCredits, course.getNumberOfCredits());
+    }
 }
