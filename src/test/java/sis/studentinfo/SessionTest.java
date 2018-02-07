@@ -6,14 +6,12 @@ import java.util.Date;
 public class SessionTest extends TestCase {
     private Session session;
     private Date startDate;
-    private DateUtil dateUtil;
     private static final String DEPARTMENT = "Engl";
     private static final String NUMBER = "200";
     
     public void setUp() {
 	Course course = new Course(DEPARTMENT, NUMBER);
-	dateUtil = new DateUtil();
-	startDate = dateUtil.createDate(2018, 1, 8);
+	startDate = DateUtil.createDate(2018, 1, 8);
 	session = new Session(course, startDate);
     }
     
@@ -49,6 +47,19 @@ public class SessionTest extends TestCase {
     }
 
     public void testSessionEndDate() {
-	assertEquals(dateUtil.createDate(2018, 4, 27), session.getEndDate());
+	assertEquals(DateUtil.createDate(2018, 4, 27), session.getEndDate());
+    }
+
+    public void testCount() {
+	Session.resetCount();;
+	assertEquals(0, Session.getCount());
+
+	Session engl101 = new Session(new Course("Engl", "101"),
+				      DateUtil.createDate(2018, 1, 8));
+	assertEquals(1, Session.getCount());
+
+	Session math200 = new Session(new Course("Math", "200"),
+				      DateUtil.createDate(2018, 1, 8));
+	assertEquals(2, Session.getCount());
     }
 }

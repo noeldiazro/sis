@@ -13,7 +13,7 @@ public class RosterReporterTest extends TestCase {
 
     public void setUp() {
 	Course course = new Course("Engl", "200");
-	Date startDate = new DateUtil().createDate(2018, 1, 8);
+	Date startDate = DateUtil.createDate(2018, 1, 8);
 	session = new Session(course, startDate);
     }
     

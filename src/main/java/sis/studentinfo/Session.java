@@ -15,9 +15,15 @@ public class Session implements Iterable<Student> {
     private List<Student> students = new ArrayList<Student>();
     private Date startDate;
 
+    private static int count;
+    static {
+	count = 0;
+    }
+
     public Session(Course course, Date startDate) {
 	this.course = course;
 	this.startDate = startDate;
+	Session.incrementCount();
     }
 
     public int getNumberOfStudents() {
@@ -58,5 +64,17 @@ public class Session implements Iterable<Student> {
 	    courseDurationInWeeks * daysPerWeek - daysFromFridayToMonday;
 	calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
       	return calendar.getTime();
+    }
+
+    static int getCount() {
+	return count;
+    }
+
+    static void resetCount() {
+	count = 0;
+    }
+
+    private static void incrementCount() {
+	count += 1;
     }
 }
