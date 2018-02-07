@@ -31,4 +31,22 @@ public class StudentTest extends TestCase {
 	assertEquals(12, student.getCredits());
 	assertTrue(student.isFullTime());
     }
+
+    public void testStudentWithoutResidenceDataIsOutOfState() {
+	Student student = new Student("Name");
+	assertFalse(student.isInState());
+    }
+
+    public void testStudentThatResidesInSchoolsStateIsInState() {
+	Student student = new Student("Name");
+	student.setState(Student.IN_STATE);
+	assertTrue(student.isInState());
+    }
+
+    public void testStudentThatDoesNotResideInSchoolsStateIsOutOfState() {
+	Student student = new Student("Name");
+	student.setState(Student.IN_STATE);
+	student.setState("MD");
+	assertFalse(student.isInState());
+    }
 }
