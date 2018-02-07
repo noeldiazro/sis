@@ -12,7 +12,7 @@ public class SessionTest extends TestCase {
     public void setUp() {
 	Course course = new Course(DEPARTMENT, NUMBER);
 	startDate = DateUtil.createDate(2018, 1, 8);
-	session = new Session(course, startDate);
+	session = Session.create(course, startDate);
     }
     
     public void testCreateAnAdvancedEnglishCourseSession() {
@@ -54,11 +54,11 @@ public class SessionTest extends TestCase {
 	Session.resetCount();;
 	assertEquals(0, Session.getCount());
 
-	Session engl101 = new Session(new Course("Engl", "101"),
+	Session engl101 = Session.create(new Course("Engl", "101"),
 				      DateUtil.createDate(2018, 1, 8));
 	assertEquals(1, Session.getCount());
 
-	Session math200 = new Session(new Course("Math", "200"),
+	Session math200 = Session.create(new Course("Math", "200"),
 				      DateUtil.createDate(2018, 1, 8));
 	assertEquals(2, Session.getCount());
     }

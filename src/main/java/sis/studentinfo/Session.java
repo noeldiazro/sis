@@ -20,12 +20,16 @@ public class Session implements Iterable<Student> {
 	count = 0;
     }
 
-    public Session(Course course, Date startDate) {
+    private Session(Course course, Date startDate) {
 	this.course = course;
 	this.startDate = startDate;
-	Session.incrementCount();
     }
 
+    public static Session create(Course course, Date startDate) {
+	Session.incrementCount();	
+	return new Session(course, startDate);
+    }
+    
     public int getNumberOfStudents() {
 	return students.size();
     }
