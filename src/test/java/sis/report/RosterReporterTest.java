@@ -6,7 +6,7 @@ import sis.studentinfo.Course;
 import sis.studentinfo.DateUtil;
 import sis.studentinfo.Session;
 import sis.studentinfo.Student;
-
+import static sis.report.ReportConstant.NEWLINE;
 
 public class RosterReporterTest extends TestCase {
     private Session session;
@@ -19,8 +19,8 @@ public class RosterReporterTest extends TestCase {
     
     public void testRosterReportForASessionWithoutStudents() {
 	String report = new RosterReporter(session).getReport();
-	assertEquals(RosterReporter.HEADER + RosterReporter.NEWLINE +
-		     RosterReporter.FOOTER + "0" + RosterReporter.NEWLINE, report); 
+	assertEquals(RosterReporter.HEADER + NEWLINE +
+		     RosterReporter.FOOTER + "0" + NEWLINE, report); 
     }
 
     public void testRosterReportForASessionWithSeveralStudents() {
@@ -29,9 +29,9 @@ public class RosterReporterTest extends TestCase {
 
 	String report = new RosterReporter(session).getReport();
 
-	assertEquals(RosterReporter.HEADER + RosterReporter.NEWLINE +
-		     "FirstnameA LastnameA" + RosterReporter.NEWLINE +
-		     "FirstnameB LastnameB" + RosterReporter.NEWLINE +
-		     RosterReporter.FOOTER + "2" + RosterReporter.NEWLINE, report);
+	assertEquals(RosterReporter.HEADER + NEWLINE +
+		     "FirstnameA LastnameA" + NEWLINE +
+		     "FirstnameB LastnameB" + NEWLINE +
+		     RosterReporter.FOOTER + "2" + NEWLINE, report);
     }
 }

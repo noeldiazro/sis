@@ -2,11 +2,11 @@ package sis.report;
 
 import sis.studentinfo.Session;
 import sis.studentinfo.Student;
+import static sis.report.ReportConstant.NEWLINE;
 
 class RosterReporter {
     static final String HEADER = "HEADER";
     static final String FOOTER = "FOOTER";
-    static final String NEWLINE = System.lineSeparator();
 
     private Session session;
     
@@ -24,10 +24,6 @@ class RosterReporter {
 	return report.toString();
     }
 
-    private String getLine(Student student) {
-	return student.getName() + NEWLINE;
-    }
-
     private void writeHeader(StringBuilder report) {
 	report.append(HEADER + NEWLINE);
     }
@@ -36,6 +32,10 @@ class RosterReporter {
 	for (Student student: session) {
 	    report.append(getLine(student));
 	}
+    }
+
+    private String getLine(Student student) {
+	return student.getName() + NEWLINE;
     }
 
     private void writeFooter(StringBuilder report) {
