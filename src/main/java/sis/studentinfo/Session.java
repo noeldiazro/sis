@@ -75,6 +75,6 @@ public class Session implements Iterable<Student> {
     }
 
     private static void incrementCount() {
-	count += 1;
+	count++;
     }
 }
