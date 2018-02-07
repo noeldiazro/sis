@@ -11,6 +11,7 @@ public class SessionTest extends TestCase {
     
     public void setUp() {
 	Course course = new Course(DEPARTMENT, NUMBER);
+	course.setNumberOfCredits(3);
 	startDate = DateUtil.createDate(2018, 1, 8);
 	session = Session.create(course, startDate);
     }
@@ -28,6 +29,7 @@ public class SessionTest extends TestCase {
 	
 	assertEquals(1, session.getNumberOfStudents());
 	assertEquals(student, session.get(0));
+	assertEquals(3, student.getCredits());
     }
 
     public void testEnrollSeveralStudents() {

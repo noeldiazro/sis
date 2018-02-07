@@ -36,6 +36,7 @@ public class Session implements Iterable<Student> {
 
     public void enroll(Student student) {
 	students.add(student);
+	student.addCredits(course.getNumberOfCredits());
     }
 
     public Iterator<Student> iterator() {
