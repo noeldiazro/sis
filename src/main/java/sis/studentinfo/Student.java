@@ -1,12 +1,14 @@
 package sis.studentinfo;
 
-import java.lang.String;
-import java.lang.Object;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Student extends Object {
     private String name;
     private int credits = 0;
     private String stateOfResidence = "";
+    private List<Grade> grades = new ArrayList<Grade>();
+	
     private static final int CREDITS_REQUIRED_FOR_FULL_TIME = 12;
     static final String IN_STATE = "CO";
     
@@ -36,5 +38,20 @@ public class Student extends Object {
 
     void setState(String state) {
 	this.stateOfResidence = state;;
+    }
+
+    double getGpa() {
+	if (grades.isEmpty()) {
+	    return 0;
+	}
+	double total = 0.0;
+	for (Grade grade: grades) {
+	    total += grade.getPoints();
+	}
+	return total / grades.size();
+    }
+
+    void addGrade(Grade grade) {
+	grades.add(grade);
     }
 }
