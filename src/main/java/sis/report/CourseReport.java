@@ -1,6 +1,7 @@
 package sis.report;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import sis.studentinfo.Course;
 import static sis.report.ReportConstant.NEWLINE;
@@ -11,6 +12,7 @@ class CourseReport {
     
     String getText() {
 	StringBuilder buffer = new StringBuilder();
+	Collections.sort(courses);
 	for (Course course: courses) {
 	    buffer.append(getLineFor(course));
 	}

@@ -1,6 +1,6 @@
 package sis.studentinfo;
 
-public class Course {
+public class Course implements Comparable<Course> {
     private String department;
     private String number;
     private int numberOfCredits = 0;
@@ -24,5 +24,15 @@ public class Course {
 
     void setNumberOfCredits(int numberOfCredits) {
 	this.numberOfCredits = numberOfCredits;
+    }
+
+    @Override public int compareTo(Course that) {
+	int compareDepartment = this.getDepartment().compareTo(that.getDepartment());
+	if (compareDepartment != 0) {
+	    return compareDepartment;
+	}
+	else {
+	    return this.getNumber().compareTo(that.getNumber());
+	}
     }
 }

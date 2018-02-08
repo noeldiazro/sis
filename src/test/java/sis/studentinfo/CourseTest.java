@@ -28,4 +28,12 @@ public class CourseTest extends TestCase {
 	course.setNumberOfCredits(numberOfCredits);
 	assertEquals(numberOfCredits, course.getNumberOfCredits());
     }
+
+    public void testCompareCourses() {
+	assertTrue(new Course("CZEC", "200").compareTo(new Course("ENGL", "101")) < 0);
+	assertTrue(new Course("ITAL", "401").compareTo(new Course("ENGL", "101")) > 0);
+	assertEquals(0, new Course("ENGL", "101").compareTo(new Course("ENGL", "101")));
+	assertTrue(new Course("ENGL", "101").compareTo(new Course("ENGL", "200")) < 0);
+	assertTrue(new Course("ENGL", "200").compareTo(new Course("ENGL", "101")) > 0);
+    }
 }

@@ -22,11 +22,13 @@ public class CourseReportTest extends TestCase {
     }
 
     public void testReportWithSeveralCourses() {
-	report.add(new Course("ENGL", "101"));
+	report.add(new Course("ENGL", "200"));
 	report.add(new Course("CZEC", "200"));
 	report.add(new Course("ITAL", "410"));
-	assertEquals("ENGL\t101" + NEWLINE +
-		     "CZEC\t200" + NEWLINE +
+	report.add(new Course("ENGL", "101"));
+	assertEquals("CZEC\t200" + NEWLINE +
+		     "ENGL\t101" + NEWLINE +
+		     "ENGL\t200" + NEWLINE +
 		     "ITAL\t410" + NEWLINE, report.getText());
     }
 }
