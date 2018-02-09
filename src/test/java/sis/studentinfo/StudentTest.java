@@ -50,8 +50,16 @@ public class StudentTest extends TestCase {
     }
 
     public void testStudentWithSeveralGrades() {
-	student.addGrade(new Grade(GradeLetter.A));
-	student.addGrade(new Grade(GradeLetter.B));
+	student.addGrade(Student.Grade.A);
+	student.addGrade(Student.Grade.B);
 	assertEquals(3.5, student.getGpa(), 0.005);
+    }
+
+    public void testGradePoints() {
+	assertEquals(4, student.gradePointsFor(Student.Grade.A));
+	assertEquals(3, student.gradePointsFor(Student.Grade.B));
+	assertEquals(2, student.gradePointsFor(Student.Grade.C));
+	assertEquals(1, student.gradePointsFor(Student.Grade.D));
+	assertEquals(0, student.gradePointsFor(Student.Grade.F));	
     }
 }

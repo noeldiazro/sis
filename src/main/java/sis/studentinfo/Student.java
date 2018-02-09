@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Student extends Object {
+    enum Grade { A, B, C, D, F }
+    
     private String name;
     private int credits = 0;
     private String stateOfResidence = "";
@@ -46,12 +48,20 @@ public class Student extends Object {
 	}
 	double total = 0.0;
 	for (Grade grade: grades) {
-	    total += grade.getPoints();
+	    total += gradePointsFor(grade);
 	}
 	return total / grades.size();
     }
 
     void addGrade(Grade grade) {
 	grades.add(grade);
+    }
+
+    int gradePointsFor(Grade grade) {
+	if (grade == Grade.A) return 4;
+	if (grade == Grade.B) return 3;
+	if (grade == Grade.C) return 2;
+	if (grade == Grade.D) return 1;
+	return 0;
     }
 }
