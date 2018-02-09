@@ -62,4 +62,22 @@ public class StudentTest extends TestCase {
 	assertEquals(1, student.gradePointsFor(Student.Grade.D));
 	assertEquals(0, student.gradePointsFor(Student.Grade.F));	
     }
+
+    public void testStudentIsNotHonorsByDefault() {
+	assertFalse(student.isHonors());
+    }
+
+    public void testSetHonors() {
+	student.setHonors();
+	assertTrue(student.isHonors());
+    }
+
+    public void testGradePointsForHonorsStudent() {
+	student.setHonors();
+	assertEquals(5, student.gradePointsFor(Student.Grade.A));
+	assertEquals(4, student.gradePointsFor(Student.Grade.B));
+	assertEquals(3, student.gradePointsFor(Student.Grade.C));
+	assertEquals(2, student.gradePointsFor(Student.Grade.D));
+	assertEquals(0, student.gradePointsFor(Student.Grade.F));
+    }
 }
