@@ -5,6 +5,8 @@ import junit.framework.TestCase;
 public class StudentTest extends TestCase {
     private Student student;
 
+    private static final double GPA_TOLERANCE = 0.005;
+    
     public void setUp() {
 	student = new Student("Name");
     }
@@ -46,38 +48,19 @@ public class StudentTest extends TestCase {
     }
 
     public void testGpaIsZeroBeforeAnyGradesHaveBeenAddedToTheStudent() {
-	assertEquals(0.0, student.getGpa(), 0.005);
+	assertEquals(0.0, student.getGpa(), GPA_TOLERANCE);
     }
 
-    public void testStudentWithSeveralGrades() {
+    public void testStudentWithSeveralGradesGpa() {
 	student.addGrade(Student.Grade.A);
 	student.addGrade(Student.Grade.B);
-	assertEquals(3.5, student.getGpa(), 0.005);
+	assertEquals(3.5, student.getGpa(), GPA_TOLERANCE);
     }
 
-    public void testGradePoints() {
-	assertEquals(4, student.gradePointsFor(Student.Grade.A));
-	assertEquals(3, student.gradePointsFor(Student.Grade.B));
-	assertEquals(2, student.gradePointsFor(Student.Grade.C));
-	assertEquals(1, student.gradePointsFor(Student.Grade.D));
-	assertEquals(0, student.gradePointsFor(Student.Grade.F));	
-    }
-
-    public void testStudentIsNotHonorsByDefault() {
-	assertFalse(student.isHonors());
-    }
-
-    public void testSetHonors() {
-	student.setHonors();
-	assertTrue(student.isHonors());
-    }
-
-    public void testGradePointsForHonorsStudent() {
-	student.setHonors();
-	assertEquals(5, student.gradePointsFor(Student.Grade.A));
-	assertEquals(4, student.gradePointsFor(Student.Grade.B));
-	assertEquals(3, student.gradePointsFor(Student.Grade.C));
-	assertEquals(2, student.gradePointsFor(Student.Grade.D));
-	assertEquals(0, student.gradePointsFor(Student.Grade.F));
+    public void testHonorsStudentGpa() {
+	student.setGradingStrategy(new HonorsGradingStrategy());
+	student.addGrade(Student.Grade.A);
+	student.addGrade(Student.Grade.B);
+	assertEquals(4.5, student.getGpa(), GPA_TOLERANCE);
     }
 }
