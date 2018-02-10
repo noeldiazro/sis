@@ -1,9 +1,7 @@
 package sis.studentinfo;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -60,15 +58,12 @@ public class Session implements Iterable<Student> {
     }
 
     Date getEndDate() {
-	Calendar calendar = new GregorianCalendar();
-	calendar.setTime(startDate);
 	final int courseDurationInWeeks = 16;
 	final int daysPerWeek = 7;
 	final int daysFromFridayToMonday = 3;
 	final int numberOfDays =
 	    courseDurationInWeeks * daysPerWeek - daysFromFridayToMonday;
-	calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);
-      	return calendar.getTime();
+	return DateUtil.addDays(startDate, numberOfDays);
     }
 
     static int getCount() {

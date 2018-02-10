@@ -6,12 +6,30 @@ import java.util.GregorianCalendar;
 import junit.framework.TestCase;
 
 public class DateUtilTest extends TestCase {
-    public void testCreateDate() {
-	Date date = DateUtil.createDate(2018, 1, 8);
-	Calendar calendar = new GregorianCalendar();
-	calendar.setTime(date);
-	assertEquals(2018, calendar.get(Calendar.YEAR));
-	assertEquals(Calendar.JANUARY, calendar.get(Calendar.MONTH));
-	assertEquals(8, calendar.get(Calendar.DAY_OF_MONTH));
+    private Date date;
+    private Calendar calendar;
+
+    public void setUp() {
+	date = DateUtil.createDate(2018, 1, 8);
+	calendar = new GregorianCalendar();
     }
+    
+    public void testCreateDate() {
+	assertDateParts(date, 2018, Calendar.JANUARY, 8);
+    }
+
+    public void testAddDays() {
+	Date result = DateUtil.addDays(date, 1);
+	assertDateParts(result, 2018, Calendar.JANUARY, 9);
+    }
+
+    private void assertDateParts(Date date,
+				 int year,
+				 int month,
+				 int dayOfMonth) {
+	calendar.setTime(date);
+	assertEquals(year, calendar.get(Calendar.YEAR));
+	assertEquals(month, calendar.get(Calendar.MONTH));
+	assertEquals(dayOfMonth, calendar.get(Calendar.DAY_OF_MONTH));
+    }	
 }

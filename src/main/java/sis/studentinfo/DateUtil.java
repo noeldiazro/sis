@@ -13,4 +13,11 @@ public class DateUtil {
 	Calendar calendar = new GregorianCalendar(year, month - january, date);
 	return calendar.getTime();
     }
+
+    static Date addDays(Date date, int numberOfDays) {
+	Calendar calendar = new GregorianCalendar();
+	calendar.setTime(date);
+	calendar.add(Calendar.DAY_OF_YEAR, numberOfDays);	
+	return calendar.getTime();
+    }
 }
