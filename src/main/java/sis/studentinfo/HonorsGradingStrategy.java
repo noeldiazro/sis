@@ -1,10 +1,9 @@
 package sis.studentinfo;
 
-class HonorsGradingStrategy implements GradingStrategy {
-    private GradingStrategy regularStrategy = new RegularGradingStrategy();
-    
+class HonorsGradingStrategy extends BasicGradingStrategy {
+
     public int getGradePointsFor(Student.Grade grade) {
-	int basicPoints = regularStrategy.getGradePointsFor(grade);
+	int basicPoints = super.getGradePointsFor(grade);
 	if (basicPoints == 0) {
 	    return basicPoints;
 	} 

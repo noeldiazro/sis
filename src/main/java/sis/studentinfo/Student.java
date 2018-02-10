@@ -10,7 +10,7 @@ public class Student extends Object {
     private int credits = 0;
     private String stateOfResidence = "";
     private List<Grade> grades = new ArrayList<Grade>();
-    private GradingStrategy gradingStrategy = new RegularGradingStrategy();
+    private GradingStrategy gradingStrategy = new BasicGradingStrategy();
     
     private static final int CREDITS_REQUIRED_FOR_FULL_TIME = 12;
     static final String IN_STATE = "CO";
