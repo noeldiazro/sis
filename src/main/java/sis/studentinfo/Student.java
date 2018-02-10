@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Student extends Object {
-    enum Grade { A, B, C, D, F }
+    public enum Grade { A, B, C, D, F }
     
     private String name;
     private int credits = 0;
