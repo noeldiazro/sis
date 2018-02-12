@@ -18,7 +18,7 @@ public class Session implements Iterable<Student> {
 	count = 0;
     }
 
-    private Session(Course course, Date startDate) {
+    protected Session(Course course, Date startDate) {
 	this.course = course;
 	this.startDate = startDate;
     }
@@ -53,19 +53,22 @@ public class Session implements Iterable<Student> {
 	return students.get(index);
     }
 
-    Date getStartDate() {
+    protected Date getStartDate() {
 	return startDate;
     }
 
-    Date getEndDate() {
-	final int courseDurationInWeeks = 16;
+    public Date getEndDate() {
 	final int daysPerWeek = 7;
 	final int daysFromFridayToMonday = 3;
 	final int numberOfDays =
-	    courseDurationInWeeks * daysPerWeek - daysFromFridayToMonday;
-	return DateUtil.addDays(startDate, numberOfDays);
+	    getDurationInWeeks() * daysPerWeek - daysFromFridayToMonday;
+	return DateUtil.addDays(getStartDate(), numberOfDays);
     }
 
+    protected int getDurationInWeeks() {
+	return 16;
+    }
+    
     static int getCount() {
 	return count;
     }
