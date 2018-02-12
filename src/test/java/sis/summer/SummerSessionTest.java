@@ -1,18 +1,18 @@
 package sis.summer;
 
 import java.util.Date;
-import junit.framework.TestCase;
 import sis.studentinfo.Course;
 import sis.studentinfo.DateUtil;
 import sis.studentinfo.Session;
+import sis.studentinfo.SessionTest;
 
-
-public class SummerSessionTest extends TestCase {
+public class SummerSessionTest extends SessionTest {
+    @Override protected Session createSession(Course course, Date startDate) {
+	return SummerSession.create(course, startDate);
+    }
+	
     public void testEndDate() {
-	Course course = new Course("ENGL", "200");
-	Date startDate = DateUtil.createDate(2018, 6, 4);
-	Session session = SummerSession.create(course, startDate);
-	Date eightWeeksOut = DateUtil.createDate(2018, 7, 27);
+	Date eightWeeksOut = DateUtil.createDate(2018, 3, 2);
 	assertEquals(eightWeeksOut, session.getEndDate());
     }
 }

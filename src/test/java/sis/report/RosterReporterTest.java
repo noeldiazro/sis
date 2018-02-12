@@ -4,6 +4,7 @@ import java.util.Date;
 import junit.framework.TestCase;
 import sis.studentinfo.Course;
 import sis.studentinfo.DateUtil;
+import sis.studentinfo.RegularSession;
 import sis.studentinfo.Session;
 import sis.studentinfo.Student;
 import static sis.report.ReportConstant.NEWLINE;
@@ -14,7 +15,7 @@ public class RosterReporterTest extends TestCase {
     public void setUp() {
 	Course course = new Course("Engl", "200");
 	Date startDate = DateUtil.createDate(2018, 1, 8);
-	session = Session.create(course, startDate);
+	session = RegularSession.create(course, startDate);
     }
     
     public void testRosterReportForASessionWithoutStudents() {

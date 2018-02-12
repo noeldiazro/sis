@@ -3,8 +3,8 @@ package sis.studentinfo;
 import junit.framework.TestCase;
 import java.util.Date;
 
-public class SessionTest extends TestCase {
-    private Session session;
+abstract public class SessionTest extends TestCase {
+    protected Session session;
     private Date startDate;
     private static final String DEPARTMENT = "Engl";
     private static final String NUMBER = "200";
@@ -13,9 +13,9 @@ public class SessionTest extends TestCase {
 	Course course = new Course(DEPARTMENT, NUMBER);
 	course.setNumberOfCredits(3);
 	startDate = DateUtil.createDate(2018, 1, 8);
-	session = Session.create(course, startDate);
+	session = createSession(course, startDate);
     }
-    
+
     public void testCreateAnAdvancedEnglishCourseSession() {
 	assertEquals(DEPARTMENT, session.getDepartment());
 	assertEquals(NUMBER, session.getNumber());
@@ -44,24 +44,9 @@ public class SessionTest extends TestCase {
 	assertEquals(student2, session.get(1));
     }
 
-    public void testSessionStartDate() {
+    public void testStartDate() {
 	assertEquals(startDate, session.getStartDate());
     }
 
-    public void testSessionEndDate() {
-	assertEquals(DateUtil.createDate(2018, 4, 27), session.getEndDate());
-    }
-
-    public void testCount() {
-	Session.resetCount();;
-	assertEquals(0, Session.getCount());
-
-	Session engl101 = Session.create(new Course("Engl", "101"),
-				      DateUtil.createDate(2018, 1, 8));
-	assertEquals(1, Session.getCount());
-
-	Session math200 = Session.create(new Course("Math", "200"),
-				      DateUtil.createDate(2018, 1, 8));
-	assertEquals(2, Session.getCount());
-    }
+    abstract protected Session createSession(Course course, Date startDate);    
 }

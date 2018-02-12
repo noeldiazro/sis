@@ -2,7 +2,6 @@ package sis.summer;
 
 import java.util.Date;
 import sis.studentinfo.Course;
-import sis.studentinfo.DateUtil;
 import sis.studentinfo.Session;
 
 public class SummerSession extends Session {

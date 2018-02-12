@@ -8,26 +8,16 @@ import java.util.List;
 /**
  * Tracks all information pertinent to a course session
  */
-public class Session implements Iterable<Student> {
+abstract public class Session implements Iterable<Student> {
     private Course course;
     private List<Student> students = new ArrayList<Student>();
     private Date startDate;
-
-    private static int count;
-    static {
-	count = 0;
-    }
 
     protected Session(Course course, Date startDate) {
 	this.course = course;
 	this.startDate = startDate;
     }
 
-    public static Session create(Course course, Date startDate) {
-	Session.incrementCount();	
-	return new Session(course, startDate);
-    }
-    
     public int getNumberOfStudents() {
 	return students.size();
     }
@@ -65,19 +55,5 @@ public class Session implements Iterable<Student> {
 	return DateUtil.addDays(getStartDate(), numberOfDays);
     }
 
-    protected int getDurationInWeeks() {
-	return 16;
-    }
-    
-    static int getCount() {
-	return count;
-    }
-
-    static void resetCount() {
-	count = 0;
-    }
-
-    private static void incrementCount() {
-	count++;
-    }
+    abstract protected int getDurationInWeeks();
 }
