@@ -8,11 +8,14 @@ public class StudentTest extends TestCase {
     private static final double GPA_TOLERANCE = 0.005;
     
     public void setUp() {
-	student = new Student("Name");
+	student = new Student("Firstname Lastname");
     }
     
     public void testCreate() {
-	assertEquals("Name", student.getName());
+	assertEquals("Firstname Lastname", student.getName());
+	assertEquals("Firstname", student.getFirstName());
+	assertEquals("Lastname", student.getLastName());
+	assertEquals("", student.getMiddleName());
     }
 
     public void testStudentStatus() {

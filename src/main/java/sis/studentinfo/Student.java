@@ -22,7 +22,7 @@ public class Student extends Object {
 	}
     }
     
-    private String name;
+    private Name name;
     private int credits = 0;
     private String stateOfResidence = "";
     private List<Grade> grades = new ArrayList<Grade>();
@@ -32,11 +32,23 @@ public class Student extends Object {
     static final String IN_STATE = "CO";
     
     public Student(String name) {
-	this.name = name;
+	this.name = Name.create(name);
     }
 
     public String getName() {
-	return name;
+	return name.getFullName();
+    }
+
+    public String getFirstName() {
+	return name.getFirstName();
+    }
+
+    public String getLastName() {
+	return name.getLastName();
+    }
+
+    public String getMiddleName() {
+	return name.getMiddleName();
     }
 
     boolean isFullTime() {
