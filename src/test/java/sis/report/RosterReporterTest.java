@@ -6,7 +6,7 @@ import sis.studentinfo.Course;
 import sis.studentinfo.DateUtil;
 import sis.studentinfo.RegularSession;
 import sis.studentinfo.Session;
-import sis.studentinfo.Student;
+import sis.studentinfo.StudentImpl;
 import static sis.report.ReportConstant.NEWLINE;
 
 public class RosterReporterTest extends TestCase {
@@ -25,8 +25,8 @@ public class RosterReporterTest extends TestCase {
     }
 
     public void testRosterReportForASessionWithSeveralStudents() {
-	session.enroll(new Student("FirstnameA LastnameA"));
-	session.enroll(new Student("FirstnameB LastnameB"));
+	session.enroll(new StudentImpl("FirstnameA LastnameA"));
+	session.enroll(new StudentImpl("FirstnameB LastnameB"));
 
 	String report = new RosterReporter(session).getReport();
 

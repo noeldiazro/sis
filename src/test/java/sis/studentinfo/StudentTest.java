@@ -8,7 +8,7 @@ public class StudentTest extends TestCase {
     private static final double GPA_TOLERANCE = 0.005;
     
     public void setUp() {
-	student = new Student("Firstname Lastname");
+	student = new StudentImpl("Firstname Lastname");
     }
     
     public void testCreate() {

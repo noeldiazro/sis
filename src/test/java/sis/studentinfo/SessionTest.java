@@ -23,7 +23,7 @@ abstract public class SessionTest extends TestCase {
     }
 
     public void testEnrollAStudent() {
-	Student student = new Student("Cain DiVoe");
+	Student student = new StudentImpl("Cain DiVoe");
 
 	session.enroll(student);
 	
@@ -33,8 +33,8 @@ abstract public class SessionTest extends TestCase {
     }
 
     public void testEnrollSeveralStudents() {
-	Student student1 = new Student("Cain DiVoe");
-	Student student2 = new Student("Coralee DeVaughn");
+	Student student1 = new StudentImpl("Cain DiVoe");
+	Student student2 = new StudentImpl("Coralee DeVaughn");
 	
 	session.enroll(student1);
 	session.enroll(student2);
