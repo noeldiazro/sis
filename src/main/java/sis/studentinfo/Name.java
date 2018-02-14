@@ -70,8 +70,7 @@ class Name {
 	}
 	
 	StringBuilder word = new StringBuilder();
-	int i = 0;
-	while (i < fullName.length()) {
+	for(int i = 0; i < fullName.length(); i++) {
 	    char letter = fullName.charAt(i);
 	    if (letter == ' ') {
 		words.add(word.toString());
@@ -79,7 +78,6 @@ class Name {
 	    } else {
 		word.append(letter);
 	    }
-	    i++;
 	}
 	words.add(word.toString());
 	return words;
