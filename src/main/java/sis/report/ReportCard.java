@@ -2,7 +2,7 @@ package sis.report;
 
 import java.util.Map;
 import java.util.EnumMap;
-import sis.studentinfo.Student;
+import sis.studentinfo.Grade;
 
 class ReportCard {
     static final String MESSAGE_A = "Excellent";
@@ -11,13 +11,13 @@ class ReportCard {
     static final String MESSAGE_D = "You're not trying";
     static final String MESSAGE_F = "Loser";
 
-    private Map<Student.Grade, String> messages;
+    private Map<Grade, String> messages;
 
-    String getMessage(Student.Grade grade) {
+    String getMessage(Grade grade) {
 	return getMessages().get(grade);
     }
 
-    private Map<Student.Grade, String> getMessages() {
+    private Map<Grade, String> getMessages() {
 	if (messages == null) {
 	    loadMessages();
 	}
@@ -25,12 +25,12 @@ class ReportCard {
     }
 
     private void loadMessages() {
-	messages = new EnumMap(Student.Grade.class);
-	messages.put(Student.Grade.A, MESSAGE_A);
-	messages.put(Student.Grade.B, MESSAGE_B);
-	messages.put(Student.Grade.C, MESSAGE_C);
-	messages.put(Student.Grade.D, MESSAGE_D);
-	messages.put(Student.Grade.F, MESSAGE_F);
+	messages = new EnumMap(Grade.class);
+	messages.put(Grade.A, MESSAGE_A);
+	messages.put(Grade.B, MESSAGE_B);
+	messages.put(Grade.C, MESSAGE_C);
+	messages.put(Grade.D, MESSAGE_D);
+	messages.put(Grade.F, MESSAGE_F);
     }
 
 }

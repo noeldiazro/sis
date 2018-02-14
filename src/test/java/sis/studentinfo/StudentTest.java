@@ -55,15 +55,15 @@ public class StudentTest extends TestCase {
     }
 
     public void testStudentWithSeveralGradesGpa() {
-	student.addGrade(Student.Grade.A);
-	student.addGrade(Student.Grade.B);
+	student.addGrade(Grade.A);
+	student.addGrade(Grade.B);
 	assertEquals(3.5, student.getGpa(), GPA_TOLERANCE);
     }
 
     public void testHonorsStudentGpa() {
 	student.setGradingStrategy(new HonorsGradingStrategy());
-	student.addGrade(Student.Grade.A);
-	student.addGrade(Student.Grade.B);
+	student.addGrade(Grade.A);
+	student.addGrade(Grade.B);
 	assertEquals(4.5, student.getGpa(), GPA_TOLERANCE);
     }
 }

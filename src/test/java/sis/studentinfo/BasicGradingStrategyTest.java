@@ -5,10 +5,10 @@ import junit.framework.TestCase;
 public class BasicGradingStrategyTest extends TestCase {
     public void testGetGradePointsFor() {
 	GradingStrategy strategy = new BasicGradingStrategy();
-	assertEquals(4, strategy.getGradePointsFor(Student.Grade.A));
-	assertEquals(3, strategy.getGradePointsFor(Student.Grade.B));
-	assertEquals(2, strategy.getGradePointsFor(Student.Grade.C));
-	assertEquals(1, strategy.getGradePointsFor(Student.Grade.D));
-	assertEquals(0, strategy.getGradePointsFor(Student.Grade.F));	
+	assertEquals(4, strategy.getGradePointsFor(Grade.A));
+	assertEquals(3, strategy.getGradePointsFor(Grade.B));
+	assertEquals(2, strategy.getGradePointsFor(Grade.C));
+	assertEquals(1, strategy.getGradePointsFor(Grade.D));
+	assertEquals(0, strategy.getGradePointsFor(Grade.F));	
     }
 }
