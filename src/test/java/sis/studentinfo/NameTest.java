@@ -1,5 +1,6 @@
 package sis.studentinfo;
 
+import java.util.List;
 import junit.framework.TestCase;
 
 public class NameTest extends TestCase {
@@ -33,7 +34,7 @@ public class NameTest extends TestCase {
 			    "Davies",
 			    "Douglas");
     }
-
+    
     private void assertNameSplitting(String expectedFullName,
 				     String expectedFirstName,
 				     String expectedLastName,

@@ -1,5 +1,9 @@
 package sis.studentinfo;
 
+import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
+
 class Name {
     private String firstName = "";
     private String lastName = "";
@@ -12,7 +16,7 @@ class Name {
     static Name create(String fullName) {
 	Name name = new Name();
 	name.fullName = fullName;
-	String[] parts;
+	List<String> parts;
 	
 	switch (getNumberOfParts(fullName)) {
 	case 1:
@@ -20,14 +24,14 @@ class Name {
 	    break;
 	case 2:
 	    parts = getParts(fullName);
-	    name.firstName = parts[0];
-	    name.lastName = parts[1];
+	    name.firstName = parts.get(0);
+	    name.lastName = parts.get(1);
 	    break;
 	case 3:
 	    parts = getParts(fullName);
-	    name.firstName = parts[0];
-	    name.lastName = parts[2];
-	    name.middleName = parts[1];
+	    name.firstName = parts.get(0);
+	    name.lastName = parts.get(2);
+	    name.middleName = parts.get(1);
 	    break;
 	}
 	return name;
@@ -50,10 +54,34 @@ class Name {
     }
 
     private static int getNumberOfParts(String fullName) {
-	return getParts(fullName).length;
+	return getParts(fullName).size();
     }
     
-    private static String[] getParts(String fullName) {
-	return fullName.split(" ");
+    private static List<String> getParts(String fullName) {
+	return tokenize(fullName);
+    }
+
+    private static List<String> tokenize(String fullName) {
+	List<String> words = new ArrayList<String>();
+
+	if (fullName.isEmpty()) {
+	    words.add(fullName);
+	    return words;
+	}
+	
+	StringBuilder word = new StringBuilder();
+	int i = 0;
+	while (i < fullName.length()) {
+	    char letter = fullName.charAt(i);
+	    if (letter == ' ') {
+		words.add(word.toString());
+		word = new StringBuilder();
+	    } else {
+		word.append(letter);
+	    }
+	    i++;
+	}
+	words.add(word.toString());
+	return words;
     }
 }
