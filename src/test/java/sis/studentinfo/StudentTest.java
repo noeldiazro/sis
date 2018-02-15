@@ -68,18 +68,19 @@ public class StudentTest extends TestCase {
     }
 
     public void testTotalChargesWhenNoCharges() {
-	assertEquals(0, student.totalCharges());
+	assertEquals(new Charge(0), student.totalCharges());
     }
 
+    
     public void testTotalChargesWithOneCharge() {
-	student.addCharge(500);
-	assertEquals(500, student.totalCharges());
+	student.addCharge(new Charge(500));
+	assertEquals(new Charge(500), student.totalCharges());
     }
 
     public void testTotalChargesWithSeveralCharges() {
-	student.addCharge(500);
-	student.addCharge(200);
-	student.addCharge(399);
-	assertEquals(1099, student.totalCharges());
+	student.addCharge(new Charge(500));
+	student.addCharge(new Charge(200));
+	student.addCharge(new Charge(399));
+	assertEquals(new Charge(1099), student.totalCharges());
     }
 }

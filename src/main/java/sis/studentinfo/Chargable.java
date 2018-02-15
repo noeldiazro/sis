@@ -1,6 +1,6 @@
 package sis.studentinfo;
 
 interface Chargable {
-    void addCharge(int cents);
-    int totalCharges();
+    void addCharge(Charge charge);
+    Charge totalCharges();
 }

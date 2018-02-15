@@ -111,6 +111,6 @@ class StudentStub implements Student {
     public void setGradingStrategy(GradingStrategy strategy) {}
     public void addGrade(Grade grade) {}
     public double getGpa() { return gpa; }
-    public void addCharge(int cents) {}
-    public int totalCharges() { return 0; }
+    public void addCharge(Charge charge) {}
+    public Charge totalCharges() { return new Charge(0); }
 }
