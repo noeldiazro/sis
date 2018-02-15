@@ -56,4 +56,24 @@ abstract public class Session implements Iterable<Student> {
     }
 
     abstract protected int getDurationInWeeks();
+
+    double getPartialStudentsAverageGpa() {
+	if (getNumberOfStudents() == 0) {
+	    return 0;
+	}
+
+	double total = 0.0;
+	int count = 0;
+	for (Student student: students) {
+	    if (!student.isFullTime()) {
+		total += student.getGpa();
+		count++;
+	    }
+	}
+	if (count == 0) {
+	    return 0;
+	} else {
+	    return total / count;
+	}
+    }
 }
