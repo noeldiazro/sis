@@ -10,7 +10,7 @@ public class StudentImpl implements Student {
     private String stateOfResidence = "";
     private List<Grade> grades = new ArrayList<Grade>();
     private GradingStrategy gradingStrategy = new BasicGradingStrategy();
-    private List<Charge> charges = new ArrayList<Charge>();
+    private ChargeBook charges = new ChargeBook();
     private static final int CREDITS_REQUIRED_FOR_FULL_TIME = 12;
     
     public StudentImpl(String name) {
@@ -77,10 +77,6 @@ public class StudentImpl implements Student {
     }
 
     public Charge totalCharges() {
-	Charge total = new Charge(0);
-	for (Charge charge: charges) {
-	    total = total.sum(charge);
-	}
-	return total;
+	return charges.getTotal();
     }
 }
