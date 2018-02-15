@@ -66,4 +66,20 @@ public class StudentTest extends TestCase {
 	student.addGrade(Grade.B);
 	assertEquals(4.5, student.getGpa(), GPA_TOLERANCE);
     }
+
+    public void testTotalChargesWhenNoCharges() {
+	assertEquals(0, student.totalCharges());
+    }
+
+    public void testTotalChargesWithOneCharge() {
+	student.addCharge(500);
+	assertEquals(500, student.totalCharges());
+    }
+
+    public void testTotalChargesWithSeveralCharges() {
+	student.addCharge(500);
+	student.addCharge(200);
+	student.addCharge(399);
+	assertEquals(1099, student.totalCharges());
+    }
 }

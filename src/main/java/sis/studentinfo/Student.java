@@ -2,7 +2,8 @@ package sis.studentinfo;
 
 public interface Student extends Creditable,
 				 Statable,
-				 Gradable {
+				 Gradable,
+				 Chargable {
 
     static final String IN_STATE = "CO";
     

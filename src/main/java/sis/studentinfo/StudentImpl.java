@@ -10,9 +10,8 @@ public class StudentImpl implements Student {
     private String stateOfResidence = "";
     private List<Grade> grades = new ArrayList<Grade>();
     private GradingStrategy gradingStrategy = new BasicGradingStrategy();
-    
+    private List<Integer> charges = new ArrayList<Integer>();
     private static final int CREDITS_REQUIRED_FOR_FULL_TIME = 12;
-    //static final String IN_STATE = "CO";
     
     public StudentImpl(String name) {
 	this.name = Name.create(name);
@@ -71,5 +70,17 @@ public class StudentImpl implements Student {
 
     public void setGradingStrategy(GradingStrategy strategy) {
 	gradingStrategy = strategy;
+    }
+
+    public void addCharge(int cents) {
+	charges.add(cents);
+    }
+
+    public int totalCharges() {
+	int total = 0;
+	for (int charge: charges) {
+	    total += charge;
+	}
+	return total;
     }
 }
