@@ -1,8 +1,8 @@
 package sis.studentinfo;
 
-import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 
 class Name {
     private String firstName = "";
@@ -58,28 +58,6 @@ class Name {
     }
     
     private static List<String> getParts(String fullName) {
-	return tokenize(fullName);
-    }
-
-    private static List<String> tokenize(String fullName) {
-	List<String> words = new ArrayList<String>();
-
-	if (fullName.isEmpty()) {
-	    words.add(fullName);
-	    return words;
-	}
-	
-	StringBuilder word = new StringBuilder();
-	for(int i = 0; i < fullName.length(); i++) {
-	    char letter = fullName.charAt(i);
-	    if (letter == ' ') {
-		words.add(word.toString());
-		word = new StringBuilder();
-	    } else {
-		word.append(letter);
-	    }
-	}
-	words.add(word.toString());
-	return words;
+	return Arrays.asList(fullName.split(" "));
     }
 }
