@@ -79,7 +79,23 @@ abstract public class SessionTest extends TestCase {
 
 	assertEquals(3.5, session.getPartialStudentsAverageGpa(), AVERAGE_GPA_TOLERANCE);
     }
-	
+
+    public void testValidURL() {
+	String spec = "http://course.unisoft.com/a1";
+	session.setURL(spec);
+	assertEquals(spec, session.getURL());
+    }
+
+    public void testInvalidURLSetting() {
+	String spec = "course";
+	try {
+	    session.setURL(spec);
+	    fail("expected exception due to invalid protocol in URL");
+	}
+	catch (InvalidURLException success) {
+	}
+    }
+    
     abstract protected Session createSession(Course course, Date startDate);    
 }
 

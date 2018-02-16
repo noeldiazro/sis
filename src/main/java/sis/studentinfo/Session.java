@@ -1,5 +1,7 @@
 package sis.studentinfo;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -12,7 +14,7 @@ abstract public class Session implements Iterable<Student> {
     private Course course;
     private List<Student> students = new ArrayList<Student>();
     private Date startDate;
-
+    private URL url;
     protected Session(Course course, Date startDate) {
 	this.course = course;
 	this.startDate = startDate;
@@ -75,5 +77,18 @@ abstract public class Session implements Iterable<Student> {
 	} else {
 	    return total / count;
 	}
+    }
+
+    void setURL(String spec) throws InvalidURLException {
+	try {
+	    url = new URL(spec);
+	}
+	catch (MalformedURLException e) {
+	    throw new InvalidURLException(e.getMessage(), e);
+	}
+    }
+
+    String getURL() {
+	return url.toString();
     }
 }
