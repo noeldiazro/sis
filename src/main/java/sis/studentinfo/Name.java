@@ -12,14 +12,12 @@ class Name {
     
     private Name() {
     }
+
+    static final int MAXIMUM_NUMBER_OF_PARTS = 3;
     
     static Name create(String fullName) {
-	final int maximumNumberOfParts = 3;
-	if (getNumberOfParts(fullName) > maximumNumberOfParts) {
-	    String message = "Name '" + fullName +
-		"' contains more than " +
-		maximumNumberOfParts + " parts";
-	    throw new NameFormatException(message);
+	if (getNumberOfParts(fullName) > MAXIMUM_NUMBER_OF_PARTS) {
+	    throw new NameFormatException(fullName, MAXIMUM_NUMBER_OF_PARTS);
 	}
 	
 	Name name = new Name();

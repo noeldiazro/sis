@@ -3,11 +3,9 @@ package sis.studentinfo;
 class NameFormatException
     extends IllegalArgumentException {
 
-    NameFormatException() {
-	super();
-    }
+    static final String MESSAGE_FORMAT = "Name '%s' contains more than %d parts";
 
-    NameFormatException(String message) {
-	super(message);
+    NameFormatException(String fullName, int maximumNumberOfParts) {
+	super(String.format(MESSAGE_FORMAT, fullName, maximumNumberOfParts));
     }
 }

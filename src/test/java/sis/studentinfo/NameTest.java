@@ -36,16 +36,19 @@ public class NameTest extends TestCase {
     }
 
     public void testBadlyFormattedName() {
+	final String tooMuchPartsName = getTestName(Name.MAXIMUM_NUMBER_OF_PARTS + 1, "A");
 	try {
-	    Name.create("a b c d");
+	    Name.create(tooMuchPartsName);
 	    fail();
 	}
 	catch (NameFormatException expectedException) {
-	    assertEquals("Name 'a b c d' contains more than 3 parts",
-			 expectedException.getMessage());
+	    String expectedMessage = String.format(NameFormatException.MESSAGE_FORMAT,
+						   tooMuchPartsName,
+						   Name.MAXIMUM_NUMBER_OF_PARTS);
+	    assertEquals(expectedMessage, expectedException.getMessage());
 	}
     }
-    
+
     private void assertNameSplitting(String expectedFullName,
 				     String expectedFirstName,
 				     String expectedLastName,
@@ -54,5 +57,15 @@ public class NameTest extends TestCase {
 	assertEquals(expectedFirstName, name.getFirstName());
 	assertEquals(expectedLastName, name.getLastName());
 	assertEquals(expectedMiddleName, name.getMiddleName());
+    }
+    
+    private String getTestName(int numberOfParts, String part) {
+	if (numberOfParts == 0)
+	    return "";
+
+	if (numberOfParts == 1)
+	    return part;
+
+	return part + " " + getTestName(numberOfParts - 1, part);
     }
 }

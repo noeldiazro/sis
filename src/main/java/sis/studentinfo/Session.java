@@ -90,7 +90,7 @@ abstract public class Session implements Iterable<Student> {
     }
 
     private void log(Exception e) {
-	e.printStackTrace();
+	//e.printStackTrace();
     }
     
     String getURL() {
