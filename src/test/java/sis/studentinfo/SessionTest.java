@@ -92,7 +92,8 @@ abstract public class SessionTest extends TestCase {
 	    session.setURL(spec);
 	    fail("expected exception due to invalid protocol in URL");
 	}
-	catch (InvalidURLException success) {
+	catch (InvalidURLException expectedException) {
+	    assertNotNull(expectedException.getCause());
 	}
     }
     

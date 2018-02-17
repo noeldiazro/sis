@@ -14,6 +14,14 @@ class Name {
     }
     
     static Name create(String fullName) {
+	final int maximumNumberOfParts = 3;
+	if (getNumberOfParts(fullName) > maximumNumberOfParts) {
+	    String message = "Name '" + fullName +
+		"' contains more than " +
+		maximumNumberOfParts + " parts";
+	    throw new NameFormatException(message);
+	}
+	
 	Name name = new Name();
 	name.fullName = fullName;
 	List<String> parts;

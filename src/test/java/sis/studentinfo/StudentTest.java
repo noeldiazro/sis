@@ -17,7 +17,7 @@ public class StudentTest extends TestCase {
 	assertEquals("Lastname", student.getLastName());
 	assertEquals("", student.getMiddleName());
     }
-
+    
     public void testStudentStatus() {
 	assertEquals(0, student.getCredits());
 	assertFalse(student.isFullTime());

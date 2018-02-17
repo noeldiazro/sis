@@ -34,6 +34,17 @@ public class NameTest extends TestCase {
 			    "Davies",
 			    "Douglas");
     }
+
+    public void testBadlyFormattedName() {
+	try {
+	    Name.create("a b c d");
+	    fail();
+	}
+	catch (NameFormatException expectedException) {
+	    assertEquals("Name 'a b c d' contains more than 3 parts",
+			 expectedException.getMessage());
+	}
+    }
     
     private void assertNameSplitting(String expectedFullName,
 				     String expectedFirstName,

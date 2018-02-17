@@ -84,10 +84,15 @@ abstract public class Session implements Iterable<Student> {
 	    url = new URL(spec);
 	}
 	catch (MalformedURLException e) {
+	    log(e);
 	    throw new InvalidURLException(e.getMessage(), e);
 	}
     }
 
+    private void log(Exception e) {
+	e.printStackTrace();
+    }
+    
     String getURL() {
 	return url.toString();
     }
