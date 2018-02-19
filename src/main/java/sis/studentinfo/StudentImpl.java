@@ -14,7 +14,7 @@ public class StudentImpl implements Student {
     private static final int CREDITS_REQUIRED_FOR_FULL_TIME = 12;
     
     public StudentImpl(String name) {
-	this.name = Name.create(name);
+	this.name = NameImpl.create(name);
     }
 
     public String getName() {
