@@ -14,8 +14,6 @@ class NameImpl implements Name {
 	this.fullName = fullName;
     }
 
-    static final int MAXIMUM_NUMBER_OF_PARTS = 3;
-    
     static NameImpl create(String fullName) {
 	if (getNumberOfParts(fullName) > MAXIMUM_NUMBER_OF_PARTS) {
 	    throw new NameFormatException(fullName, MAXIMUM_NUMBER_OF_PARTS);
