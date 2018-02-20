@@ -130,4 +130,6 @@ class StudentStub implements Student {
     public double getGpa() { return gpa; }
     public void addCharge(Charge charge) {}
     public Charge totalCharges() { return new Charge(0); }
+    public void setId(String id) {}
+    public String getId() { return ""; }
 }

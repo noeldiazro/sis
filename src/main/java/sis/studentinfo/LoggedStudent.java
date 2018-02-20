@@ -67,4 +67,12 @@ class LoggedStudent implements Student {
     public Charge totalCharges() {
 	return student.totalCharges();
     }
+
+    public void setId(String id) {
+	student.setId(id);
+    }
+
+    public String getId() {
+	return student.getId();
+    }
 }

@@ -11,5 +11,7 @@ public interface Student extends Creditable,
     String getFirstName();
     String getLastName();
     String getMiddleName();
+    void setId(String id);
+    String getId();
 }
 

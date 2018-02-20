@@ -6,6 +6,7 @@ import java.util.List;
 public class StudentImpl implements Student {
     
     private Name name;
+    private String id;
     private int credits = 0;
     private String stateOfResidence = "";
     private List<Grade> grades = new ArrayList<Grade>();
@@ -78,5 +79,13 @@ public class StudentImpl implements Student {
 
     public Charge totalCharges() {
 	return charges.getTotal();
+    }
+
+    public void setId(String id) {
+	this.id = id;
+    }
+
+    public String getId() {
+	return id;
     }
 }

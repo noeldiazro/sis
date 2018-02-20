@@ -83,4 +83,9 @@ public class StudentTest extends TestCase {
 	student.addCharge(new Charge(399));
 	assertEquals(new Charge(1099), student.totalCharges());
     }
+
+    public void testStudentId() {
+	student.setId("1");
+	assertEquals("1", student.getId());
+    }
 }

@@ -40,6 +40,8 @@ public class LoggedStudentTest extends TestCase {
 	public void setGradingStrategy(GradingStrategy strategy) {}
 	public void addCharge(Charge charge) {}
 	public Charge totalCharges() { return new Charge(0); }
+	public void setId(String id) {}
+	public String getId() { return ""; }
     }
 
     private class LoggerMock implements Logger {
