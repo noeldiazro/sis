@@ -1,8 +1,10 @@
 package sis.studentinfo;
 
-import junit.framework.TestCase;
-
-public class CourseTest extends TestCase {
+import junitx.extensions.EqualsHashCodeTestCase;
+    
+public class CourseTest extends EqualsHashCodeTestCase {
+    public CourseTest() { super(""); } // EqualsHashCodeTestCase requires constructor with String argument
+    
     public void testCreateBasicMathCourse() {
 	final String department = "Math";
 	final String number = "101";
@@ -37,6 +39,14 @@ public class CourseTest extends TestCase {
 	assertTrue(new Course("ENGL", "200").compareTo(new Course("ENGL", "101")) > 0);
     }
 
+    @Override protected Object createInstance() {
+	return new Course("NURS", "201");
+    }
+
+    @Override protected Object createNotEqualInstance() {
+	return new Course("ENGL", "101");
+    }
+    
     public void testCourseIsDifferentToNull() {
 	assertFalse(new Course("NURS", "201").equals(null));
     }

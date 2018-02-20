@@ -47,4 +47,12 @@ public class Course implements Comparable<Course> {
 	return this.getDepartment() == that.getDepartment() &&
 	    this.getNumber() == that.getNumber();
     }
+
+    @Override public int hashCode() {
+	final int hashMultiplier = 41;
+	int result = 7;
+	result = result * hashMultiplier + getDepartment().hashCode();
+	result = result * hashMultiplier + getNumber().hashCode();
+	return getDepartment().hashCode();
+    }
 }
