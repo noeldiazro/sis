@@ -36,4 +36,25 @@ public class CourseTest extends TestCase {
 	assertTrue(new Course("ENGL", "101").compareTo(new Course("ENGL", "200")) < 0);
 	assertTrue(new Course("ENGL", "200").compareTo(new Course("ENGL", "101")) > 0);
     }
+
+    public void testCourseIsDifferentToNull() {
+	assertFalse(new Course("NURS", "201").equals(null));
+    }
+
+    public void testCourseIsDifferentToNonCourses() {
+	assertFalse(new Course("NURS", "201").equals("Plain String"));
+    }
+						     
+    public void testCoursesWithSameDepartmentAndNumberAreEqual() {
+	assertEquals(new Course("NURS", "201"),
+		     new Course("NURS", "201"));
+    }
+
+    public void testCoursesFromSameDepartmentButDifferentNumberAreDistinct() {
+	assertFalse(new Course("NURS", "201").equals(new Course("NURS", "400")));
+    }
+
+    public void testCoursesWithDifferentDepartmentButSameNumberAreDistinct() {
+	assertFalse(new Course("ENGL", "201").equals(new Course("NURS", "201")));
+    }
 }

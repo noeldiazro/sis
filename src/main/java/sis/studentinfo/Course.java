@@ -35,4 +35,16 @@ public class Course implements Comparable<Course> {
 	    return this.getNumber().compareTo(that.getNumber());
 	}
     }
+
+    @Override public boolean equals(Object obj) {
+	if (obj == null)
+	    return false;
+
+	if (!(obj instanceof Course))
+	    return false;
+
+	Course that = (Course)obj;
+	return this.getDepartment() == that.getDepartment() &&
+	    this.getNumber() == that.getNumber();
+    }
 }
