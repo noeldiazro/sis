@@ -1,13 +1,23 @@
 package sis.studentinfo;
 
-import junit.framework.TestCase;
+import junitx.extensions.EqualsHashCodeTestCase;
 
-public class StudentTest extends TestCase {
+public class StudentTest extends EqualsHashCodeTestCase {
     private Student student;
 
     private static final double GPA_TOLERANCE = 0.005;
     
-    public void setUp() {
+    public StudentTest() {
+	super("StudentTest"); // Required by base class
+    }
+    
+    @Override public void setUp() {
+	try {
+	    super.setUp();
+	}
+	catch (Exception e) {
+	    fail();
+	}
 	student = new StudentImpl("Firstname Lastname");
     }
     
@@ -87,5 +97,29 @@ public class StudentTest extends TestCase {
     public void testStudentId() {
 	student.setId("1");
 	assertEquals("1", student.getId());
+    }
+
+    @Override protected Object createInstance() {
+	Student instance = new StudentImpl("Name");
+	instance.setId("1");
+	return instance;
+    }
+    
+    @Override protected Object createNotEqualInstance() {
+	Student instance = new StudentImpl("Name");
+	instance.setId("2");
+	return instance;
+    }
+
+    public void testDoesNotEqualNull() {
+	Student instance = new StudentImpl("Name");
+	instance.setId("1");
+	assertFalse(instance.equals(null));
+    }
+
+    public void testDoesNotEqualNotStudentObjects() {
+	Student instance = new StudentImpl("Name");
+	instance.setId("1");
+	assertFalse(instance.equals(new Object()));
     }
 }

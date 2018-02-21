@@ -88,4 +88,18 @@ public class StudentImpl implements Student {
     public String getId() {
 	return id;
     }
+
+    @Override public boolean equals(Object obj) {
+	if (obj == null)
+	    return false;
+	if (!(obj instanceof Student))
+	    return false;
+	
+	Student that = (Student)obj;
+	return this.getId() == that.getId();
+    }
+
+    @Override public int hashCode() {
+	return this.getId().hashCode();
+    }
 }
