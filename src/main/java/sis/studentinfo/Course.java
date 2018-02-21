@@ -55,4 +55,8 @@ public class Course implements Comparable<Course> {
 	result = result * hashMultiplier + getNumber().hashCode();
 	return getDepartment().hashCode();
     }
+
+    @Override public String toString() {
+	return getDepartment() + " " + getNumber();
+    }
 }

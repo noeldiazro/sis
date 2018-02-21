@@ -67,4 +67,8 @@ public class CourseTest extends EqualsHashCodeTestCase {
     public void testCoursesWithDifferentDepartmentButSameNumberAreDistinct() {
 	assertFalse(new Course("ENGL", "201").equals(new Course("NURS", "201")));
     }
+
+    public void testToString() {
+	assertEquals("ENGL 201", new Course("ENGL", "201").toString());
+    }
 }
