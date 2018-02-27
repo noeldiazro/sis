@@ -102,4 +102,84 @@ public class StudentImpl implements Student {
     @Override public int hashCode() {
 	return this.getId().hashCode();
     }
+
+    private int flags = 0x0;
+    	
+    boolean isOnCampus() {
+	return isFlag(Flag.ON_CAMPUS);
+    }
+
+    void setOnCampus() {
+	setFlag(Flag.ON_CAMPUS);
+    }
+
+    void unsetOnCampus() {
+	unsetFlag(Flag.ON_CAMPUS);
+    }
+
+    boolean isTaxExempt() {
+	return isFlag(Flag.TAX_EXEMPT);
+    }
+
+    void setTaxExempt() {
+	setFlag(Flag.TAX_EXEMPT);
+    }
+
+    void unsetTaxExempt() {
+	unsetFlag(Flag.TAX_EXEMPT);
+    }
+
+    boolean isMinor() {
+	return isFlag(Flag.MINOR);
+    }
+
+    void setMinor() {
+	setFlag(Flag.MINOR);
+    }
+
+    void unsetMinor() {
+	unsetFlag(Flag.MINOR);
+    }
+
+    boolean isTroublemaker() {
+	return isFlag(Flag.TROUBLEMAKER);
+    }
+
+    void setTroublemaker() {
+	setFlag(Flag.TROUBLEMAKER);
+    }
+
+    void unsetTroublemaker() {
+	unsetFlag(Flag.TROUBLEMAKER);
+    }
+    
+    private boolean isFlag(Flag flag) {
+	int mask = flag.getMask();
+	return (flags & mask) == mask;
+    }
+
+    private void setFlag(Flag flag) {
+	flags = flags | flag.getMask();
+    }
+
+    private void unsetFlag(Flag flag) {
+	flags = flags & (~flag.getMask());
+    }
+	
+    private enum Flag {
+	ON_CAMPUS(1),
+	TAX_EXEMPT(2),
+	MINOR(4),
+	TROUBLEMAKER(8);
+	
+	private int mask;
+	
+	Flag(int mask) {
+	    this.mask = mask;
+	}
+
+	int getMask() {
+	    return mask;
+	}
+    }
 }

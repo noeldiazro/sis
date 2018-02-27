@@ -122,4 +122,76 @@ public class StudentTest extends EqualsHashCodeTestCase {
 	instance.setId("1");
 	assertFalse(instance.equals(new Object()));
     }
+
+    public void testIsOnCampus() {
+	StudentImpl student = new StudentImpl("a");
+	assertFalse(student.isOnCampus());
+    }
+
+    public void testSetOnCampus() {
+	StudentImpl student = new StudentImpl("a");
+	student.setOnCampus();
+	assertTrue(student.isOnCampus());
+    }
+
+    public void testUnsetOnCampus() {
+	StudentImpl student = new StudentImpl("a");
+	student.setOnCampus();
+	student.unsetOnCampus();
+	assertFalse(student.isOnCampus());
+    }
+
+    public void testStudentIsNotTaxExemptByDefault() {
+	StudentImpl student = new StudentImpl("a");
+	assertFalse(student.isTaxExempt());
+    }
+
+    public void testSetTaxExempt() {
+	StudentImpl student = new StudentImpl("a");
+	student.setTaxExempt();
+	assertTrue(student.isTaxExempt());
+    }
+
+    public void testUnsetTaxExempt() {
+	StudentImpl student = new StudentImpl("a");
+	student.setTaxExempt();
+	student.unsetTaxExempt();
+	assertFalse(student.isTaxExempt());
+    }
+
+    public void testIsMinor() {
+	StudentImpl student = new StudentImpl("a");
+	assertFalse(student.isMinor());
+    }
+
+    public void testSetMinor() {
+	StudentImpl student = new StudentImpl("a");
+	student.setMinor();
+	assertTrue(student.isMinor());
+    }
+
+    public void testUnsetMinor() {
+	StudentImpl student = new StudentImpl("a");
+	student.setMinor();
+	student.unsetMinor();
+	assertFalse(student.isMinor());
+    }
+
+    public void testIsNotTroublemakerByDefault() {
+	StudentImpl student = new StudentImpl("a");
+	assertFalse(student.isTroublemaker());
+    }
+
+    public void testSetTroublemaker() {
+	StudentImpl student = new StudentImpl("a");
+	student.setTroublemaker();
+	assertTrue(student.isTroublemaker());
+    }
+
+    public void testUnsetTroublemaker() {
+	StudentImpl student = new StudentImpl("a");
+	student.setTroublemaker();
+	student.unsetTroublemaker();
+	assertFalse(student.isTroublemaker());
+    }    
 }
