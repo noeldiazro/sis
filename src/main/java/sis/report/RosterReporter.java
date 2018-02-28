@@ -1,44 +1,44 @@
 package sis.report;
 
+import java.io.IOException;
+import java.io.Writer;
 import sis.studentinfo.Session;
 import sis.studentinfo.Student;
-import static sis.report.ReportConstant.NEWLINE;
 
 class RosterReporter {
-    static final String HEADER = "HEADER";
-    static final String FOOTER = "FOOTER";
-
-    private Session session;
+    static final String HEADER = "Student%n-------%n";
+    static final String FOOTER = "# students = %d%n";
+    static final String LINE = "%s%n";
     
-    RosterReporter(Session session) {
+    private Session session;
+    private Writer writer;
+    
+    RosterReporter(Session session, Writer writer) {
 	this.session = session;
+	this.writer = writer;
     }
 
-    String getReport() {
-	StringBuilder report = new StringBuilder();
-
-	writeHeader(report);
-	writeBody(report);
-	writeFooter(report);
-	
-	return report.toString();
+    void write() throws IOException {
+	writeHeader();
+	writeBody();
+	writeFooter();
     }
 
-    private void writeHeader(StringBuilder report) {
-	report.append(HEADER + NEWLINE);
+    private void writeHeader() throws IOException {
+	writer.write(String.format(HEADER));
     }
 
-    private void writeBody(StringBuilder report) {
+    private void writeBody() throws IOException {
 	for (Student student: session) {
-	    report.append(getLine(student));
+	    writer.write(getLine(student));
 	}
     }
 
     private String getLine(Student student) {
-	return student.getName() + NEWLINE;
+	return String.format(LINE, student.getName());
     }
 
-    private void writeFooter(StringBuilder report) {
-	report.append(FOOTER + session.getNumberOfStudents() + NEWLINE);
+    private void writeFooter() throws IOException {
+        writer.write(String.format(FOOTER, session.getNumberOfStudents()));
     }
 }

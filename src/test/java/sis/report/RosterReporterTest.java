@@ -1,5 +1,8 @@
 package sis.report;
 
+import java.io.IOException;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.Date;
 import junit.framework.TestCase;
 import sis.studentinfo.Course;
@@ -11,28 +14,34 @@ import static sis.report.ReportConstant.NEWLINE;
 
 public class RosterReporterTest extends TestCase {
     private Session session;
-
+    private Writer writer;
+    
     public void setUp() {
 	Course course = new Course("Engl", "200");
 	Date startDate = DateUtil.createDate(2018, 1, 8);
 	session = RegularSession.create(course, startDate);
+	writer = new StringWriter();
     }
     
-    public void testRosterReportForASessionWithoutStudents() {
-	String report = new RosterReporter(session).getReport();
-	assertEquals(RosterReporter.HEADER + NEWLINE +
-		     RosterReporter.FOOTER + "0" + NEWLINE, report); 
+    public void testRosterReportForASessionWithoutStudents() throws IOException {
+	RosterReporter report = new RosterReporter(session, writer);
+
+	report.write();
+	
+	assertEquals(String.format(RosterReporter.HEADER) +
+		     String.format(RosterReporter.FOOTER, 0), writer.toString()); 
     }
 
-    public void testRosterReportForASessionWithSeveralStudents() {
+    public void testRosterReportForASessionWithSeveralStudents() throws IOException {
 	session.enroll(new StudentImpl("FirstnameA LastnameA"));
 	session.enroll(new StudentImpl("FirstnameB LastnameB"));
+	RosterReporter reporter = new RosterReporter(session, writer);
 
-	String report = new RosterReporter(session).getReport();
+	reporter.write();
 
-	assertEquals(RosterReporter.HEADER + NEWLINE +
-		     "FirstnameA LastnameA" + NEWLINE +
-		     "FirstnameB LastnameB" + NEWLINE +
-		     RosterReporter.FOOTER + "2" + NEWLINE, report);
+	assertEquals(String.format(RosterReporter.HEADER) +
+		     String.format(RosterReporter.LINE, "FirstnameA LastnameA") +
+		     String.format(RosterReporter.LINE, "FirstnameB LastnameB") +
+		     String.format(RosterReporter.FOOTER, 2), writer.toString());
     }
 }
