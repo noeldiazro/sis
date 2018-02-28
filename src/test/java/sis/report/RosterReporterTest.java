@@ -1,6 +1,6 @@
 package sis.report;
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -19,11 +19,18 @@ import static sis.report.ReportConstant.NEWLINE;
 
 public class RosterReporterTest extends TestCase {
     private Session session;
+    private final String filename = "rosterReport.txt";
     
-    public void setUp() {
+    @Override public void setUp() throws Exception {
+	super.setUp();
 	Course course = new Course("Engl", "200");
 	Date startDate = DateUtil.createDate(2018, 1, 8);
 	session = RegularSession.create(course, startDate);
+    }
+
+    @Override public void tearDown() throws Exception {
+	super.tearDown();
+	deleteReport();
     }
     
     public void testRosterReportForASessionWithoutStudents() throws IOException {
@@ -48,7 +55,7 @@ public class RosterReporterTest extends TestCase {
 
     public void testFiledReport() throws IOException {
 	populateSession();
-	final String filename = "rosterReport.txt";
+	
 	Writer fileWriter = new FileWriter(filename);
 	RosterReporter reporter = new RosterReporter(session, fileWriter);
 
@@ -95,5 +102,11 @@ public class RosterReporterTest extends TestCase {
 		     String.format(RosterReporter.LINE, "FirstnameA LastnameA") +
 		     String.format(RosterReporter.LINE, "FirstnameB LastnameB") +
 		     String.format(RosterReporter.FOOTER, 2), actual);
+    }
+
+    private void deleteReport() throws SecurityException {
+	File file = new File(filename);
+	if (file.exists())
+	    assertTrue(file.delete());
     }
 }
