@@ -19,6 +19,15 @@ class RosterReporter {
     }
 
     void write() throws IOException {
+	try {
+	    writeParts();
+	}
+	finally {
+	    writer.close();
+	}
+    }
+
+    private void writeParts() throws IOException {
 	writeHeader();
 	writeBody();
 	writeFooter();
