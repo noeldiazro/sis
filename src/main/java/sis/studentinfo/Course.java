@@ -1,6 +1,8 @@
 package sis.studentinfo;
 
-public class Course implements Comparable<Course> {
+import java.io.Serializable;
+
+public class Course implements Comparable<Course>, Serializable {
     private String department;
     private String number;
     private int numberOfCredits = 0;

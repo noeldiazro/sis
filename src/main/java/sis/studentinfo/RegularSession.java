@@ -1,5 +1,6 @@
 package sis.studentinfo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 public class RegularSession extends Session {
@@ -7,7 +8,7 @@ public class RegularSession extends Session {
     static {
 	count = 0;
     }
-    
+
     private RegularSession(Course course, Date startDate) {
 	super(course, startDate);
     }

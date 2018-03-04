@@ -1,5 +1,6 @@
 package sis.studentinfo;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Tracks all information pertinent to a course session
  */
-abstract public class Session implements Iterable<Student> {
+abstract public class Session implements Iterable<Student>, Serializable {
     private Course course;
     private List<Student> students = new ArrayList<Student>();
     private Date startDate;

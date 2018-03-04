@@ -34,7 +34,7 @@ class CourseCatalog {
 	db.store(this);
     }
 
-    void load() throws IOException {
+    void load() throws CourseCatalogDBException {
 	db.load(this);
     }
 }
