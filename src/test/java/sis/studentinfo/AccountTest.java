@@ -57,37 +57,46 @@ public class AccountTest extends TestCase {
 	account.associateBankAccount(new BankAccount(new Bank(BANK_ACCOUNT_ABA),
 						     BANK_ACCOUNT_NUMBER,
 						     BankAccount.Type.CHECKING));
-	account.setAch(new MockAch(AchStatus.SUCCESS));
+	account.setAch(createMockAch(AchStatus.SUCCESS));
 	account.transferFromBank(BANK_TRANSFER_AMOUNT);
 	assertEquals(BANK_TRANSFER_AMOUNT, account.getBalance());
     }
 
+
     public void testTransferFromBank_Failure() {
 	account.associateBankAccount(new BankAccount(new Bank(BANK_ACCOUNT_ABA),
 						     BANK_ACCOUNT_NUMBER,
-						     BankAccount.Type.CHECKING));	
-	account.setAch(new MockAch(AchStatus.FAILURE));
+						     BankAccount.Type.CHECKING));
+	account.setAch(createMockAch(AchStatus.FAILURE));
 	account.transferFromBank(BANK_TRANSFER_AMOUNT);
 	assertEquals(new BigDecimal("0.00"), account.getBalance());
     }
+
+    private Ach createMockAch(AchStatus status) {
+	return new MockAch() {
+		@Override public AchResponse issueDebit(AchCredentials credentials,
+					      AchTransactionData data) {
+
+		    assertData(data);
+		    AchResponse response = new AchResponse();
+		    response.status = status;
+		    return response;
+		}
+
+	    private void assertData(AchTransactionData data) {
+		assertEquals(BANK_TRANSFER_AMOUNT, data.amount);
+		assertEquals(BANK_ACCOUNT_ABA, data.aba);
+		assertEquals(BANK_ACCOUNT_NUMBER, data.account);
+		assertEquals("CHECKING", data.accountType);
+	    }
+	};
+    }
+
     
     private class MockAch implements Ach {
-	private AchStatus status;
-	
-	private MockAch(AchStatus status) {
-	    this.status = status;
-	}
-	    
 	public AchResponse issueDebit(AchCredentials credentials,
 				      AchTransactionData data) {
-
-	    assertEquals(BANK_TRANSFER_AMOUNT, data.amount);
-	    assertEquals(BANK_ACCOUNT_ABA, data.aba);
-	    assertEquals(BANK_ACCOUNT_NUMBER, data.account);
-	    assertEquals("CHECKING", data.accountType);
-	    AchResponse response = new AchResponse();
-	    response.status = this.status;
-	    return response;
+	    throw new UnsupportedOperationException();
 	}
 	
 	public AchResponse markTransactionAsNSF(AchCredentials credentials,
