@@ -1,9 +1,12 @@
 package sis.studentinfo;
 
+import java.io.Serializable;
+
 public interface Student extends Creditable,
 				 Statable,
 				 Gradable,
-				 Chargable {
+				 Chargable,
+				 Serializable {
 
     static final String IN_STATE = "CO";
     

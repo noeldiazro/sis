@@ -10,8 +10,8 @@ public class StudentImpl implements Student {
     private int credits = 0;
     private String stateOfResidence = "";
     private List<Grade> grades = new ArrayList<Grade>();
-    private GradingStrategy gradingStrategy = new BasicGradingStrategy();
-    private ChargeBook charges = new ChargeBook();
+    private transient GradingStrategy gradingStrategy = new BasicGradingStrategy();
+    private transient ChargeBook charges = new ChargeBook();
     private static final int CREDITS_REQUIRED_FOR_FULL_TIME = 12;
     
     public StudentImpl(String name) {
