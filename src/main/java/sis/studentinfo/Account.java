@@ -9,7 +9,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
-class Account {
+class Account implements Accountable {
     private final List<BigDecimal> transactions = new ArrayList<BigDecimal>();
     private Ach ach;
     private BankAccount associatedBankAccount;
@@ -18,18 +18,18 @@ class Account {
 	this.ach = ach;
     }
     
-    BigDecimal getBalance() {
+    public BigDecimal getBalance() {
 	BigDecimal balance = new BigDecimal("0.00");
 	for (BigDecimal transaction: transactions)
 	    balance = balance.add(transaction);
 	return balance;
     }
 
-    void credit(BigDecimal amount) {
+    public void credit(BigDecimal amount) {
 	transactions.add(amount);
     }
 
-    BigDecimal getAverageTransaction() {
+    public BigDecimal getAverageTransaction() {
 	if (transactions.isEmpty())
 	    throw new NoRegisteredTransactionsException();
 	
@@ -37,7 +37,7 @@ class Account {
 	return getBalance().divide(numberOfTransactions, 4, RoundingMode.HALF_UP);
     }
 
-    void transferFromBank(BigDecimal amount) {
+    public void transferFromBank(BigDecimal amount) {
 	AchResponse response = ach.issueDebit(null, makeTransactionData(amount));
 	if (isSuccessful(response))
 	    credit(amount);
@@ -56,7 +56,7 @@ class Account {
 	return data;
     }
 
-    void associateBankAccount(BankAccount account) {
+    public void associateBankAccount(BankAccount account) {
 	associatedBankAccount = account;
     }
 }
