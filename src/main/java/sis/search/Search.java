@@ -1,33 +1,38 @@
 package sis.search;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import sis.util.StringUtil;
 
 class Search {
-    private final String urlSpec;
-    private int matchCount = 0;
-    private final String searchString;
+    private final SearchParameterization params;
+    private final Occurrencer occurrencer;
     
-    Search(String urlSpec, String searchString) {
-	this.urlSpec = urlSpec;
-	this.searchString = searchString;
+    private int matchCount = 0;
+    private boolean errored = false;
+    private Exception exception;
+    
+    Search(SearchParameterization params, Occurrencer occurrencer) {
+	this.params = params;
+	this.occurrencer = occurrencer;
     }
 
-    void execute() throws MalformedURLException, IOException {
-
-	try (URLReader reader = new URLReader()) {
+    void execute() {
+	try {
+	    tryCountingOccurrences();
+	}
+	catch (Exception e) {
+	    errored = true;
+	    exception = e;
+	}
+	/*
+	try (BufferedReader reader = new BufferedReader(new InputStreamReader(input))) {
 	    while (true) {
 		String line = reader.readLine();
 		if (line == null) break;
-		matchCount += StringUtil.occurrences(line, searchString);
+		matchCount += StringUtil.occurrences(line, params.getSearchString());
 	    }
 	}
+	*/
     }
 
     int getMatchCount() {
@@ -35,27 +40,17 @@ class Search {
     }
 
     boolean isErrored() {
-	return false;
+	return errored;
     }
 
-    private class URLReader implements AutoCloseable {
-	private BufferedReader reader = null;
+    Exception getError() {
+	return exception;
+    }
+    
+    private void tryCountingOccurrences() throws MalformedURLException, IOException {
+	URL url = params.getUrl();
+
+	matchCount = occurrencer.countOccurrences(url.openStream(), params.getSearchString());
+    }
 	
-	private String readLine() throws MalformedURLException, IOException {
-	    if (reader == null)
-		reader = getReader();
-	    return reader.readLine();
-	}
-
-	private BufferedReader getReader() throws MalformedURLException, IOException {
-	    URL url = new URL(urlSpec);
-	    URLConnection connection = url.openConnection();
-	    InputStream input = connection.getInputStream();
-	    return new BufferedReader(new InputStreamReader(input));
-	}
-
-	public void close() throws IOException {
-	    reader.close();
-	}
-    }
 }
