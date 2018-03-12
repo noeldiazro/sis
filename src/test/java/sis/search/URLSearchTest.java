@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.IOException;
 import junit.framework.TestCase;
 
-public class SearchTest extends TestCase {
+public class URLSearchTest extends TestCase {
     private static final String URL_SPEC = "http://www.langrsoft.com";
     private SearchParameterization params;
     
@@ -20,7 +20,7 @@ public class SearchTest extends TestCase {
 
     public void testNegativeSearch() {
 	Occurrencer occurrencer = getOccurrencer(0);
-	Search search = new Search(params, occurrencer);
+	Search search = new URLSearch(params, occurrencer);
 	search.execute();
 	assertEquals(0, search.getMatchCount());
 	assertFalse(search.isErrored());
@@ -28,7 +28,7 @@ public class SearchTest extends TestCase {
 
     public void testPositiveSearch() {
 	Occurrencer occurrencer = getOccurrencer(1);
-	Search search = new Search(params, occurrencer);
+	Search search = new URLSearch(params, occurrencer);
 	search.execute();
 	assertEquals(1, search.getMatchCount());
 	assertFalse(search.isErrored());
@@ -36,7 +36,7 @@ public class SearchTest extends TestCase {
 
     public void testErroredSearch() {
 	Occurrencer occurrencer = getErroredOccurrencer();
-	Search search = new Search(params, occurrencer);
+	Search search = new URLSearch(params, occurrencer);
 	search.execute();
 	assertTrue(search.isErrored());
 	assertEquals(IOException.class, search.getError().getClass());
