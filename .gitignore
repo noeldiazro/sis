@@ -2,3 +2,5 @@
 .java-version
 doc/
 target/
+ObjectCourseCatalog.db
+StudentDirectory.dat

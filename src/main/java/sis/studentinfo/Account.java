@@ -60,14 +60,20 @@ class Account implements Accountable {
 	associatedBankAccount = account;
     }
 
-    public void withdraw(BigDecimal amount) {
+    public synchronized void withdraw(BigDecimal amount) {
 	if (!enoughBalance(amount))
 	    throw new InsufficientFundsException();
+	trySleep(1);
 	transactions.add(amount.negate());
     }
 
     private boolean enoughBalance(BigDecimal amount) {
 	return amount.compareTo(getBalance()) <= 0;
+    }
+
+    private void trySleep(long millis) {
+	try { Thread.sleep(millis); }
+	catch (InterruptedException e) {}
     }
 	
 }
