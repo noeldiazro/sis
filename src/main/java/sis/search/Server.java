@@ -1,12 +1,10 @@
 package sis.search;
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 class Server extends Thread {
-    private List<Search> queue =
-	Collections.synchronizedList(new LinkedList<Search>());
+    private BlockingQueue<Search> queue = new LinkedBlockingQueue<Search>();
     private ResultsListener listener;
     
     Server(ResultsListener listener) {
@@ -14,15 +12,17 @@ class Server extends Thread {
 	start();
     }
     
-    void add(Search search) {
-	queue.add(search);
+    void add(Search search) throws InterruptedException {
+	queue.put(search);
     }
 
     @Override public void run() {
 	while (true) {
-	    if (!queue.isEmpty())
-		execute(queue.remove(0));
-	    Thread.yield();
+	    try {
+		execute(queue.take());
+	    }
+	    catch (InterruptedException e) {
+	    }
 	}
     }
 

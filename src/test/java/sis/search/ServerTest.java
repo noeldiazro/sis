@@ -5,24 +5,28 @@ import junit.framework.TestCase;
 public class ServerTest extends TestCase {
     private int numberOfResults = 0;
     private static final int NUMBER_OF_SEARCHES = 3;
+    private Server server;
     
-    public void testSearch() {
-	ResultsListener listener = new ResultsListener() {
-		public void executed(Search search) {
-		    System.out.println("Search executed");
-		    numberOfResults++;
-		}
-	    };
-	
-	Server server = new Server(listener);
-	for (int i=0; i < NUMBER_OF_SEARCHES; i++)
-	    server.add(createSearch());
-
-	while (numberOfResults < NUMBER_OF_SEARCHES)
-	    trySleeping(1);
-
+    public void testSearch() throws InterruptedException {
+	ResultsListener listener = makeListener();
+	server = new Server(listener);
+	addSearches(NUMBER_OF_SEARCHES);
+	waitForSearches();
     }
 
+    private ResultsListener makeListener() {
+	return new ResultsListener() {
+	    public void executed(Search search) {
+		numberOfResults++;
+	    }
+	};
+    }
+
+    private void addSearches(int numberOfSearches) throws InterruptedException{
+	for (int i=0; i < numberOfSearches; i++)
+	    server.add(createSearch());
+    }
+    
     private Search createSearch() {
 	return new Search() {
 	    public void execute() {}
@@ -32,6 +36,11 @@ public class ServerTest extends TestCase {
 	};
     }
 
+    private void waitForSearches() {
+	while (numberOfResults < NUMBER_OF_SEARCHES)
+	    trySleeping(1);
+    }
+    
     private void trySleeping(long millis) {
 	try {
 	    Thread.sleep(1);
