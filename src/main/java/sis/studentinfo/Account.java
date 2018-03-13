@@ -59,4 +59,15 @@ class Account implements Accountable {
     public void associateBankAccount(BankAccount account) {
 	associatedBankAccount = account;
     }
+
+    public void withdraw(BigDecimal amount) {
+	if (!enoughBalance(amount))
+	    throw new InsufficientFundsException();
+	transactions.add(amount.negate());
+    }
+
+    private boolean enoughBalance(BigDecimal amount) {
+	return amount.compareTo(getBalance()) <= 0;
+    }
+	
 }

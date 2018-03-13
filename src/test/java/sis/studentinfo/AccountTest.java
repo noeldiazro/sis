@@ -128,4 +128,20 @@ public class AccountTest extends TestCase {
 	    throw new UnsupportedOperationException();
 	}
     }
+
+    public void testWithdraw_InsufficientFunds() {
+	account.credit(new BigDecimal("100.00"));
+	try {
+	    account.withdraw(new BigDecimal("140.00"));
+	    fail("InsufficientFundsException should have been thrown");
+	}
+	catch (InsufficientFundsException e) {}
+    }
+
+    public void testWithdraw_SufficientFunds() {
+	account.credit(new BigDecimal("100.00"));
+	account.withdraw(new BigDecimal("60.00"));
+	assertEquals(new BigDecimal("40.00"), account.getBalance());
+    }
+	    
 }
