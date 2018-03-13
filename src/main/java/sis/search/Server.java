@@ -22,6 +22,7 @@ class Server extends Thread {
 		execute(queue.take());
 	    }
 	    catch (InterruptedException e) {
+		break;
 	    }
 	}
     }
@@ -29,5 +30,9 @@ class Server extends Thread {
     private void execute(Search search) {
 	search.execute();
 	listener.executed(search);
+    }
+
+    void shutdown() {
+	this.interrupt();
     }
 }

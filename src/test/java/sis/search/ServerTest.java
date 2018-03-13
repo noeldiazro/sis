@@ -47,4 +47,10 @@ public class ServerTest extends TestCase {
 	}
 	catch (InterruptedException e) {}
     }
+
+    @Override public void tearDown() throws Exception {
+	server.shutdown();
+	server.join(3000);
+	assertFalse(server.isAlive());
+    }
 }
