@@ -14,6 +14,7 @@ class Clock extends Thread {
     }
     
     @Override public void run() {
+	Thread.currentThread().setPriority(Thread.NORM_PRIORITY - 1);
 	while (run) {
 	    trySleeping(ONE_SECOND);
 	    listener.update(new Date());
