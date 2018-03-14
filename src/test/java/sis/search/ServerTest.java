@@ -1,19 +1,36 @@
 package sis.search;
 
+import java.util.List;
 import junit.framework.TestCase;
 
 public class ServerTest extends TestCase {
     private int numberOfResults = 0;
     private static final int NUMBER_OF_SEARCHES = 3;
     private Server server;
-    
-    public void testSearch() throws InterruptedException {
+
+    @Override public void setUp() throws Exception {
+	super.setUp();
 	ResultsListener listener = makeListener();
 	server = new Server(listener);
+    }
+    
+    public void testSearch() throws InterruptedException {
 	addSearches(NUMBER_OF_SEARCHES);
 	waitForSearches();
     }
 
+    public void testLogs() throws InterruptedException {
+	addSearches(NUMBER_OF_SEARCHES);
+	waitForSearches();
+	List<String> logs = server.getLogs();
+	assertEquals(2 * NUMBER_OF_SEARCHES, logs.size());
+	for (int i=0; i < NUMBER_OF_SEARCHES; i+=2) {
+	    assertEquals(Server.START_MSG, logs.get(i));
+	    assertEquals(Server.STOP_MSG, logs.get(i + 1));
+	}
+	    
+    }
+    
     private ResultsListener makeListener() {
 	return new ResultsListener() {
 	    public void executed(Search search) {
@@ -29,7 +46,8 @@ public class ServerTest extends TestCase {
     
     private Search createSearch() {
 	return new Search() {
-	    public void execute() {}
+	    public void execute() { trySleeping(1); }
+
 	    public int getMatchCount() { return -1; }
 	    public boolean isErrored() { return false; }
 	    public Exception getError() { return null; }
