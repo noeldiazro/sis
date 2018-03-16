@@ -1,13 +1,10 @@
 package sis.util;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 class MultiHashMap<K, V> {
-    private final Map<K, Collection<V>> map =
-	new HashMap<K, Collection<V>>();
+    private final Map<K, List<V>> map =
+	new HashMap<K, List<V>>();
     
     int size() {
 	return map.size();
@@ -15,18 +12,22 @@ class MultiHashMap<K, V> {
 
     void put(K key, V value) {
 	if (!map.containsKey(key))
-	    map.put(key, getEmptyCollection());
+	    map.put(key, getEmptyList());
 	map.get(key).add(value);
     }
 
-    Collection<V> get(K key) {
+    List<V> get(K key) {
 	if (!map.containsKey(key))
-	    return getEmptyCollection();
+	    return getEmptyList();
 	return map.get(key);
     }
 
-    private Collection<V> getEmptyCollection() {
+    private List<V> getEmptyList() {
 	return new ArrayList<V>();
+    }
+
+    protected Set<Map.Entry<K, List<V>>> getEntrySet() {
+	return map.entrySet();
     }
 
 }
