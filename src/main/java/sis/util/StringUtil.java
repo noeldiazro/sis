@@ -1,5 +1,6 @@
 package sis.util;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class StringUtil {
@@ -32,4 +33,19 @@ public class StringUtil {
     private static String addNewline(Object element) {
 	return String.format("%s%n", element.toString());
     }
+
+    static String concatenateNumbers(List<? extends Number> list, int decimalPlaces) {
+	if (list == null) return "";
+
+	StringBuilder result = new StringBuilder();
+	for (Number number: list)
+	    result.append(formatNumber(number, decimalPlaces));
+	return result.toString();
+    }
+
+    private static String formatNumber(Number number, int decimalPlaces) {
+	String format = String.format("%%.%df%%n", decimalPlaces);
+	return String.format(format, number.doubleValue());
+    }
+
 }
