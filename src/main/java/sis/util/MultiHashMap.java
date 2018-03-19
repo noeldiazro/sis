@@ -30,4 +30,11 @@ class MultiHashMap<K, V> {
 	return map.entrySet();
     }
 
+    void filter(MultiHashMap<K, ? super V> target, Filter filter) {
+	for (K key: map.keySet())
+	    for (V value: map.get(key))
+		if (filter.apply(value))
+		    target.put(key, value);
+    }
+
 }

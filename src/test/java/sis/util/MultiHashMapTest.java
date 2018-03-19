@@ -3,6 +3,7 @@ package sis.util;
 import java.util.Collection;
 import java.util.Date;
 import junit.framework.TestCase;
+import sis.studentinfo.DateUtil;
 
 public class MultiHashMapTest extends TestCase {
     private static final Date TODAY;
@@ -54,5 +55,36 @@ public class MultiHashMapTest extends TestCase {
 	for (String expectedEvent: expectedEvents)
 	    assertTrue(retrievedEvents.contains(expectedEvent));
     }
-    
+
+    public void testFilter() {
+	MultiHashMap<String, java.sql.Date> meetings =
+	    new MultiHashMap<String, java.sql.Date>();
+
+	meetings.put("iteration start", createSqlDate(2005, 9, 12));
+	meetings.put("iteration start", createSqlDate(2005, 9, 26));
+	meetings.put("VP blather", createSqlDate(2005, 9, 12));
+	meetings.put("brown bags", createSqlDate(2005, 9, 14));
+
+	MultiHashMap<String, Date> mondayMeetings =
+	    new MultiHashMap<String, Date>();
+
+	
+	meetings.filter(mondayMeetings, new Filter<Date>() {
+		public boolean apply(Date date) {
+		    return true;
+		}
+	    });
+
+
+	assertEquals(3, mondayMeetings.size());
+    }
+
+    private java.sql.Date createSqlDate(int year,
+					int month,
+					int day) {
+
+	Date date = DateUtil.createDate(year, month, day);
+	return new java.sql.Date(date.getTime());
+    }
+
 }
