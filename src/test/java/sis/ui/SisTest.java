@@ -15,6 +15,7 @@ public class SisTest extends TestCase {
 	assertEquals(Sis.WIDTH, sis.getWidth());
 	assertEquals(Sis.HEIGHT, sis.getHeight());
 	assertFalse(sis.isVisible());
+	assertTrue(sis.getPanel() instanceof CoursePanel);
     }
 
     public void testShow() {
