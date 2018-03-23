@@ -8,8 +8,8 @@ public class CoursePanelTest extends TestCase {
 	CoursePanel panel = new CoursePanel(panelName);
 	assertEquals(panelName, panel.getName());
 
-	assertEquals(CoursePanel.LABEL_TEXT, panel.getLabelText());
 	assertTrue(panel.getNames().contains(CoursePanel.LABEL_NAME));
+	assertEquals(CoursePanel.LABEL_TEXT, panel.getLabelText());
 
 	assertTrue(panel.getNames().contains(CoursePanel.COURSES_LIST_NAME));
 	assertEquals(0, panel.getListSize());

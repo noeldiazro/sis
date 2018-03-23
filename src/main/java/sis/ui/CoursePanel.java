@@ -31,34 +31,46 @@ class CoursePanel extends JPanel {
 
     private void initialize(String name) {
 	setName(name);
-	
-	label = new JLabel(LABEL_TEXT);
-	label.setName(LABEL_NAME);
+
+	label = createLabel(LABEL_NAME, LABEL_TEXT);
+	list = createList(COURSES_LIST_NAME);
+	addButton = createButton(ADD_BUTTON_NAME, ADD_BUTTON_TEXT);
+	deptLabel = createLabel(DEPARTMENT_LABEL_NAME, DEPARTMENT_LABEL_TEXT);
+	deptField = createTextField(DEPARTMENT_FIELD_NAME, COLUMNS);
+	nmbrLabel = createLabel(NUMBER_LABEL_NAME, NUMBER_LABEL_TEXT);
+	nmbrField = createTextField(NUMBER_FIELD_NAME, COLUMNS);
+
 	add(label);
-
-	list = new JList<String>();
-	list.setName(COURSES_LIST_NAME);
 	add(list);
-	
-	addButton = new JButton(ADD_BUTTON_TEXT);
-	addButton.setName(ADD_BUTTON_NAME);
 	add(addButton);
-
-	deptLabel = new JLabel(DEPARTMENT_LABEL_TEXT);
-	deptLabel.setName(DEPARTMENT_LABEL_NAME);
 	add(deptLabel);
-
-	deptField = new JTextField(COLUMNS);
-	deptField.setName(DEPARTMENT_FIELD_NAME);
 	add(deptField);
-
-	nmbrLabel = new JLabel(NUMBER_LABEL_TEXT);
-	nmbrLabel.setName(NUMBER_LABEL_NAME);
 	add(nmbrLabel);
-
-	nmbrField = new JTextField(COLUMNS);
-	nmbrField.setName(NUMBER_FIELD_NAME);
 	add(nmbrField);
+    }
+
+    private JLabel createLabel(final String name, final String text) {
+	final JLabel label = new JLabel(text);
+	label.setName(name);
+	return label;
+    }
+
+    private JList<String> createList(final String name) {
+	final JList<String> list = new JList<String>();
+	list.setName(name);
+	return list;
+    }
+
+    private JButton createButton(final String name, final String text) {
+	final JButton button = new JButton(text);
+	button.setName(name);
+	return button;
+    }
+
+    private JTextField createTextField(final String name, final int columns) {
+	final JTextField field = new JTextField(columns);
+	field.setName(name);
+	return field;
     }
     
     String getLabelText() {
