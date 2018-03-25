@@ -1,12 +1,21 @@
 package sis.ui;
 
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import junit.framework.TestCase;
+import sis.studentinfo.Course;
 
 public class CoursePanelTest extends TestCase {
+    private static final String PANEL_NAME = "coursePanel";
+    private CoursePanel panel;
+    private boolean wasClicked = false;
+    
+    @Override protected void setUp() {
+	panel = new CoursePanel(PANEL_NAME);
+    }
+    
     public void testCreate() {
-	final String panelName = "coursePanel";
-	CoursePanel panel = new CoursePanel(panelName);
-	assertEquals(panelName, panel.getName());
+	assertEquals(PANEL_NAME, panel.getName());
 
 	assertTrue(panel.getNames().contains(CoursePanel.LABEL_NAME));
 	assertEquals(CoursePanel.LABEL_TEXT, panel.getLabelText());
@@ -28,6 +37,26 @@ public class CoursePanelTest extends TestCase {
 
 	assertTrue(panel.getNames().contains(CoursePanel.NUMBER_FIELD_NAME));
 	assertEquals("", panel.getNumberFieldText());
+    }
 
+    public void testAddButtonClick() {
+	panel.addButtonClickListener(makeListener());
+	panel.clickButton();
+	assertTrue(wasClicked);
+    }
+
+    private ActionListener makeListener() {
+	return new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		wasClicked = true;
+	    }
+	};
+    }
+
+    public void testAddCourse() {
+	Course course = new Course("ENGL", "101");
+	panel.addCourse(course);
+	assertEquals(1, panel.getListSize());
+	assertEquals("ENGL 101", panel.getCourseAt(0).toString());
     }
 }

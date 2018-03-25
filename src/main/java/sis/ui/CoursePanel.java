@@ -1,7 +1,9 @@
 package sis.ui;
 
+import java.awt.event.ActionListener;
 import java.util.Set;
 import javax.swing.*;
+import sis.studentinfo.Course;
 
 class CoursePanel extends JPanel {
     static final String LABEL_NAME = "label";
@@ -18,12 +20,15 @@ class CoursePanel extends JPanel {
     private static final int COLUMNS = 20;
     
     private JLabel label;
-    private JList<String> list;    
+    private JList<Course> list;    
     private JButton addButton;
     private JLabel deptLabel;
     private JTextField deptField;
     private JLabel nmbrLabel;
     private JTextField nmbrField;
+
+    private DefaultListModel<Course> listModel =
+	new DefaultListModel<Course>();
     
     CoursePanel(String name) {
 	initialize(name);
@@ -55,8 +60,8 @@ class CoursePanel extends JPanel {
 	return label;
     }
 
-    private JList<String> createList(final String name) {
-	final JList<String> list = new JList<String>();
+    private JList<Course> createList(final String name) {
+	final JList<Course> list = new JList<Course>(listModel);
 	list.setName(name);
 	return list;
     }
@@ -103,5 +108,21 @@ class CoursePanel extends JPanel {
 
     String getNumberFieldText() {
 	return nmbrField.getText();
+    }
+
+    void addButtonClickListener(ActionListener listener) {
+	addButton.addActionListener(listener);
+    }
+
+    void clickButton() {
+	addButton.doClick();
+    }
+
+    void addCourse(Course course) {
+	listModel.addElement(course);
+    }
+
+    Course getCourseAt(int index) {
+	return listModel.getElementAt(index);
     }
 }
