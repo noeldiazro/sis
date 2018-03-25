@@ -1,7 +1,6 @@
 package sis.ui;
 
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Set;
 import javax.swing.*;
@@ -56,14 +55,22 @@ class CoursePanel extends JPanel {
 	addButton = createButton(ADD_BUTTON_NAME, ADD_BUTTON_TEXT);
 	final JPanel fieldsPanel = createFieldsPanel();
 
-	panel.setLayout(new BorderLayout());
+	panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 	
-	panel.add(addButton, BorderLayout.NORTH);
-	panel.add(createFieldsPanel(), BorderLayout.SOUTH);
+	addButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+	panel.add(addButton);
+	panel.add(createVerticalSeparator(6));
+	panel.add(createFieldsPanel());
+	
+	panel.setBorder(BorderFactory.createEmptyBorder(8, 8, 8, 8));
 	
 	return panel;
     }
 
+    private Component createVerticalSeparator(int height) {
+	return Box.createRigidArea(new Dimension(0, height));
+    }
+    
     private JPanel createFieldsPanel() {
 	final JPanel panel = new JPanel();
 
