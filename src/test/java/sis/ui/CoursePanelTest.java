@@ -57,6 +57,6 @@ public class CoursePanelTest extends TestCase {
 	Course course = new Course("ENGL", "101");
 	panel.addCourse(course);
 	assertEquals(1, panel.getListSize());
-	assertEquals("ENGL 101", panel.getCourseAt(0).toString());
+	assertEquals("ENGL-101", panel.getCourseAt(0).toString());
     }
 }

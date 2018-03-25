@@ -20,15 +20,15 @@ class CoursePanel extends JPanel {
     private static final int COLUMNS = 20;
     
     private JLabel label;
-    private JList<Course> list;    
+    private JList<CourseDisplayAdapter> list;    
     private JButton addButton;
     private JLabel deptLabel;
     private JTextField deptField;
     private JLabel nmbrLabel;
     private JTextField nmbrField;
 
-    private DefaultListModel<Course> listModel =
-	new DefaultListModel<Course>();
+    private DefaultListModel<CourseDisplayAdapter> listModel =
+	new DefaultListModel<CourseDisplayAdapter>();
     
     CoursePanel(String name) {
 	initialize(name);
@@ -60,8 +60,8 @@ class CoursePanel extends JPanel {
 	return label;
     }
 
-    private JList<Course> createList(final String name) {
-	final JList<Course> list = new JList<Course>(listModel);
+    private JList<CourseDisplayAdapter> createList(final String name) {
+	final JList<CourseDisplayAdapter> list = new JList<CourseDisplayAdapter>(listModel);
 	list.setName(name);
 	return list;
     }
@@ -119,10 +119,10 @@ class CoursePanel extends JPanel {
     }
 
     void addCourse(Course course) {
-	listModel.addElement(course);
+	listModel.addElement(new CourseDisplayAdapter(course));
     }
 
-    Course getCourseAt(int index) {
+    CourseDisplayAdapter getCourseAt(int index) {
 	return listModel.getElementAt(index);
     }
 }
