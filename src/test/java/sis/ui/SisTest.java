@@ -23,6 +23,16 @@ public class SisTest extends TestCase {
 	assertTrue(sis.isVisible());
     }
 
+    public void testAddCourse() {
+	CoursePanel panel = sis.getPanel();
+	
+	panel.setDepartment("MATH");
+	panel.setNumber("300");
+	panel.clickButton();
+	
+	assertEquals("MATH-300", panel.getCourseAt(0).toString());
+    }
+    
     @Override protected void tearDown() throws Exception {
 	super.tearDown();
 	sis.close();

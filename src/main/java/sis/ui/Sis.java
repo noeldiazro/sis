@@ -1,8 +1,11 @@
 package sis.ui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Set;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import sis.studentinfo.Course;
 
 final class Sis {
     static final int WIDTH = 350;
@@ -22,7 +25,23 @@ final class Sis {
     private void initialize() {
 	frame.setSize(WIDTH, HEIGHT);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	frame.getContentPane().add(new CoursePanel(COURSE_PANEL_NAME));
+	frame.getContentPane().add(makePanel());
+    }
+
+    private CoursePanel makePanel() {
+	CoursePanel panel = new CoursePanel(COURSE_PANEL_NAME);
+	panel.addButtonClickListener(makeListener(panel));
+	return panel;
+    }
+
+    private ActionListener makeListener(CoursePanel panel) {
+	return new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		String department = panel.getDepartmentFieldText();
+		String number = panel.getNumberFieldText();
+		panel.addCourse(new Course(department, number));
+	    }
+	};
     }
     
     int getWidth() {
@@ -47,5 +66,9 @@ final class Sis {
 
     Set<String> getNames() {
 	return Util.getNames(frame.getContentPane());
+    }
+
+    CoursePanel getPanel() {
+	return (CoursePanel)(frame.getContentPane().getComponents()[0]);
     }
 }

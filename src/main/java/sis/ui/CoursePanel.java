@@ -125,4 +125,12 @@ class CoursePanel extends JPanel {
     CourseDisplayAdapter getCourseAt(int index) {
 	return listModel.getElementAt(index);
     }
+
+    void setDepartment(final String department) {
+	deptField.setText(department);
+    }
+
+    void setNumber(final String number) {
+	nmbrField.setText(number);
+    }
 }
