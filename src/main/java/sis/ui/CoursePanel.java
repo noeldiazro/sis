@@ -1,5 +1,7 @@
 package sis.ui;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.Set;
 import javax.swing.*;
@@ -39,21 +41,47 @@ class CoursePanel extends JPanel {
 
 	label = createLabel(LABEL_NAME, LABEL_TEXT);
 	list = createList(COURSES_LIST_NAME);
+	JPanel bottomPanel = createBottomPanel();
+	
+	setLayout(new BorderLayout());
+	
+	add(label, BorderLayout.NORTH);
+	add(list, BorderLayout.CENTER);
+	add(bottomPanel, BorderLayout.SOUTH);
+    }
+
+    private JPanel createBottomPanel() {
+	final JPanel panel = new JPanel();
+	
 	addButton = createButton(ADD_BUTTON_NAME, ADD_BUTTON_TEXT);
+	final JPanel fieldsPanel = createFieldsPanel();
+
+	panel.setLayout(new BorderLayout());
+	
+	panel.add(addButton, BorderLayout.NORTH);
+	panel.add(createFieldsPanel(), BorderLayout.SOUTH);
+	
+	return panel;
+    }
+
+    private JPanel createFieldsPanel() {
+	final JPanel panel = new JPanel();
+
 	deptLabel = createLabel(DEPARTMENT_LABEL_NAME, DEPARTMENT_LABEL_TEXT);
 	deptField = createTextField(DEPARTMENT_FIELD_NAME, COLUMNS);
 	nmbrLabel = createLabel(NUMBER_LABEL_NAME, NUMBER_LABEL_TEXT);
 	nmbrField = createTextField(NUMBER_FIELD_NAME, COLUMNS);
 
-	add(label);
-	add(list);
-	add(addButton);
-	add(deptLabel);
-	add(deptField);
-	add(nmbrLabel);
-	add(nmbrField);
-    }
+	panel.setLayout(new GridLayout(2, 2));
+	
+	panel.add(deptLabel);
+	panel.add(deptField);
+	panel.add(nmbrLabel);
+	panel.add(nmbrField);
 
+	return panel;
+    }
+    
     private JLabel createLabel(final String name, final String text) {
 	final JLabel label = new JLabel(text);
 	label.setName(name);
