@@ -2,6 +2,8 @@ package sis.ui;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyListener;
 import junit.framework.TestCase;
 import sis.studentinfo.Course;
 
@@ -34,6 +36,8 @@ public class CoursePanelTest extends TestCase {
 
 	assertTrue(panel.getNames().contains(CoursePanel.NUMBER_FIELD_NAME));
 	assertEquals("", panel.getNumberFieldText());
+
+	assertEquals(CoursePanel.ADD_BUTTON_MNEMONIC, panel.getAddButtonMnemonic());
     }
 
     public void testAddButtonClick() {
@@ -55,5 +59,21 @@ public class CoursePanelTest extends TestCase {
 	panel.addCourse(course);
 	assertEquals(1, panel.getListSize());
 	assertEquals("ENGL-101", panel.getCourseAt(0).toString());
+    }
+
+    public void testEnablAddButton() {
+	panel.enableAddButton();
+	assertTrue(panel.isAddButtonEnabled());
+    }
+
+    public void testDisableAddButton() {
+	panel.disableAddButton();
+	assertFalse(panel.isAddButtonEnabled());
+    }
+
+    public void testAddListener() {
+	KeyListener listener = new KeyAdapter() {};
+	panel.addDepartmentFieldListener(listener);
+	assertSame(listener, panel.getDepartmentFieldKeyListenerAt(0));
     }
 }

@@ -2,6 +2,7 @@ package sis.ui;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.util.Set;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -20,6 +21,7 @@ class CoursePanel extends JPanel {
     static final String NUMBER_LABEL_NAME = "nmbrLabel";
     static final String NUMBER_LABEL_TEXT = "Number";
     static final String NUMBER_FIELD_NAME = "nmbrField";
+    static final char ADD_BUTTON_MNEMONIC = 'A';
     private static final int COLUMNS = 20;
     
     private JLabel label;
@@ -72,6 +74,7 @@ class CoursePanel extends JPanel {
 	final JPanel panel = new JPanel();
 	
 	addButton = createButton(ADD_BUTTON_NAME, ADD_BUTTON_TEXT);
+	addButton.setMnemonic(ADD_BUTTON_MNEMONIC);
 	final JPanel fieldsPanel = createFieldsPanel();
 
 	panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
@@ -207,5 +210,29 @@ class CoursePanel extends JPanel {
 
     void setNumber(final String number) {
 	nmbrField.setText(number);
+    }
+
+    char getAddButtonMnemonic() {
+	return (char)addButton.getMnemonic();
+    }
+
+    void enableAddButton() {
+	addButton.setEnabled(true);
+    }
+
+    boolean isAddButtonEnabled() {
+	return addButton.isEnabled();
+    }
+
+    void disableAddButton() {
+	addButton.setEnabled(false);
+    }
+
+    void addDepartmentFieldListener(KeyListener listener) {
+	deptField.addKeyListener(listener);
+    }
+
+    KeyListener getDepartmentFieldKeyListenerAt(int index) {
+	return deptField.getKeyListeners()[index];
     }
 }
