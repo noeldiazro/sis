@@ -72,15 +72,36 @@ class CoursePanel extends JPanel {
     }
     
     private JPanel createFieldsPanel() {
-	final JPanel panel = new JPanel();
+	final GridBagLayout layout = new GridBagLayout();
+	final JPanel panel = new JPanel(layout);
 
 	deptLabel = createLabel(DEPARTMENT_LABEL_NAME, DEPARTMENT_LABEL_TEXT);
 	deptField = createTextField(DEPARTMENT_FIELD_NAME, COLUMNS);
 	nmbrLabel = createLabel(NUMBER_LABEL_NAME, NUMBER_LABEL_TEXT);
 	nmbrField = createTextField(NUMBER_FIELD_NAME, COLUMNS);
 
-	panel.setLayout(new GridLayout(2, 2));
-	
+	layout.setConstraints(deptLabel,
+			      new GridBagConstraints(0, 0, // gridx, gridy
+						  1, 1, // gridwidth, gridheight
+						  40, 1, // weightx, weighty
+						  GridBagConstraints.LINE_END, // anchor
+						  GridBagConstraints.NONE, // fill
+						  new Insets(3, 3, 3, 3), // top-left-bottom-right
+						  0, 0)); // padx, pady
+
+	layout.setConstraints(deptField,
+			      new GridBagConstraints(1, 0, 2, 1, 60, 1, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+						     new Insets(3, 3, 3, 3), 0, 0));
+
+	layout.setConstraints(nmbrLabel,
+			      new GridBagConstraints(0, 1, 1, 1, 40, 1, GridBagConstraints.LINE_END, GridBagConstraints.NONE,
+						  new Insets(3, 3, 3, 3), 0, 0));
+
+
+	layout.setConstraints(nmbrField,
+			      new GridBagConstraints(1, 1, 2, 1, 60, 1, GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+						     new Insets(3, 3, 3, 3), 0, 0));
+
 	panel.add(deptLabel);
 	panel.add(deptField);
 	panel.add(nmbrLabel);
