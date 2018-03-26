@@ -11,6 +11,7 @@ final class Sis {
     static final int WIDTH = 350;
     static final int HEIGHT = 200;
     static final String COURSE_PANEL_NAME = "coursePanel";
+    static final String TITLE = "Course Listing";
     
     private final JFrame frame = new JFrame();
     
@@ -26,6 +27,7 @@ final class Sis {
 	frame.setSize(WIDTH, HEIGHT);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.getContentPane().add(makePanel());
+	frame.setTitle(TITLE);
     }
 
     private CoursePanel makePanel() {
@@ -70,5 +72,9 @@ final class Sis {
 
     CoursePanel getPanel() {
 	return (CoursePanel)(frame.getContentPane().getComponents()[0]);
+    }
+
+    String getTitle() {
+	return frame.getTitle();
     }
 }
