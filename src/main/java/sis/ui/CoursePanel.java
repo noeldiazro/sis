@@ -4,6 +4,8 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Set;
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.BevelBorder;
 import sis.studentinfo.Course;
 
 class CoursePanel extends JPanel {
@@ -38,17 +40,34 @@ class CoursePanel extends JPanel {
     private void initialize(String name) {
 	setName(name);
 
-	label = createLabel(LABEL_NAME, LABEL_TEXT);
 	list = createList(COURSES_LIST_NAME);
+	JScrollPane coursesScroll = new JScrollPane(list);
+	coursesScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	
 	JPanel bottomPanel = createBottomPanel();
 	
 	setLayout(new BorderLayout());
+
+	makeBorder();
 	
-	add(label, BorderLayout.NORTH);
-	add(list, BorderLayout.CENTER);
+	add(coursesScroll, BorderLayout.CENTER);
 	add(bottomPanel, BorderLayout.SOUTH);
     }
 
+    private void makeBorder() {
+	final int pad = 6;
+	final Border emptyBorder =
+	    BorderFactory.createEmptyBorder(pad, pad, pad, pad);
+
+	final Border bevelBorder =
+	    BorderFactory.createBevelBorder(BevelBorder.RAISED);
+
+	final Border titledBorder =
+	    BorderFactory.createTitledBorder(bevelBorder, LABEL_TEXT);
+	
+	setBorder(BorderFactory.createCompoundBorder(emptyBorder, titledBorder));
+    }
+    
     private JPanel createBottomPanel() {
 	final JPanel panel = new JPanel();
 	
