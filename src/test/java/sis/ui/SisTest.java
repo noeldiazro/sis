@@ -1,5 +1,6 @@
 package sis.ui;
 
+import java.awt.Image;
 import junit.framework.TestCase;
 
 public class SisTest extends TestCase {
@@ -17,6 +18,8 @@ public class SisTest extends TestCase {
 	assertFalse(sis.isVisible());
 	assertTrue(sis.getNames().contains(Sis.COURSE_PANEL_NAME));
 	assertEquals(Sis.TITLE, sis.getTitle());
+
+	assertNotNull(sis.getIconImage());
     }
 
     public void testShow() {

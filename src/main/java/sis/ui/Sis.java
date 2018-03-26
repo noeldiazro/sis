@@ -1,5 +1,6 @@
 package sis.ui;
 
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Set;
@@ -28,6 +29,7 @@ final class Sis {
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.getContentPane().add(makePanel());
 	frame.setTitle(TITLE);
+	frame.setIconImage(ImageUtil.create("/images/courses.gif"));
     }
 
     private CoursePanel makePanel() {
@@ -76,5 +78,9 @@ final class Sis {
 
     String getTitle() {
 	return frame.getTitle();
+    }
+
+    Image getIconImage() {
+	return frame.getIconImage();
     }
 }
