@@ -1,15 +1,16 @@
 package sis.ui;
 
 import java.awt.Image;
+import java.awt.Robot;
 import junit.framework.TestCase;
 
 public class SisTest extends TestCase {
 
-    private Sis sis;
+    private HumbleSis sis;
     
     @Override protected void setUp() throws Exception {
 	super.setUp();
-	sis = new Sis();
+	sis = new HumbleSis(new Sis());
     }
     
     public void testCreate() {
@@ -36,9 +37,35 @@ public class SisTest extends TestCase {
 	
 	assertEquals("MATH-300", panel.getCourseAt(0).toString());
     }
+
+    public void testKeyListeners() throws Exception {
+	CoursePanel panel = sis.getPanel();
+	Robot robot = new Robot();
+	
+	sis.show();
+
+	assertFalse(panel.isAddButtonEnabled());
+
+	sis.selectDepartmentField();
+    }
     
     @Override protected void tearDown() throws Exception {
 	super.tearDown();
 	sis.close();
     }
+
+    private class HumbleSis extends Sis {
+	private Sis sis;
+	
+	HumbleSis(Sis sis) {
+	    this.sis = sis;
+	}
+
+	void selectDepartmentField() {
+	    getDepartmentFieldLocation();
+	}
+
+	private void getDepartmentFieldLocation() {}
+    }
 }
+

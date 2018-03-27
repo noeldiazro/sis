@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import sis.studentinfo.Course;
 
-final class Sis {
+class Sis {
     static final int WIDTH = 350;
     static final int HEIGHT = 200;
     static final String COURSE_PANEL_NAME = "coursePanel";
